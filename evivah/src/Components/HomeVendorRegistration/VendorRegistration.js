@@ -13,8 +13,8 @@ const Testimonials = () => {
                             REGISTER & BOOST YOUR BUSINESS 🚀
                         </p>
 
-                        <button style={{ width: "15%" }} type="button" class="btn btn-danger">
-                            <Link to="/user-roles">
+                        <button style={{ width: "15%" }} type="button" className="btn btn-danger">
+                            <Link to="/user-roles" style={{color:"#fff"}}>
                                 Register Now
                             </Link>
                         </button>

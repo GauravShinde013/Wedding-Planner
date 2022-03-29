@@ -3,7 +3,7 @@ import React from 'react'
 import  {Col,Row,Container}  from 'react-bootstrap'
 import plannerLogo from "../img/planner.svg"
 import clientLogo from "../img/client.jpg"
-import vendorLogo from "../img/1 (1).png"
+import vendorLogo from "../img/vendor.png"
 import { useNavigate } from 'react-router-dom'
 
 

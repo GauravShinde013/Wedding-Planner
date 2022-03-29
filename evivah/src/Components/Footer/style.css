@@ -9,7 +9,7 @@
     margin: auto;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
 }
 
 .footer h6,p {
@@ -42,6 +42,12 @@
     width: 250px;
     border: 1px solid var(--lightgrey);
 }
+.top-vendors{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: minmax(40px, auto);
+    column-gap: 14px;
+}
 
 .footer button {
     margin-left: .8rem;
@@ -70,11 +76,12 @@
         flex-wrap: wrap;
         justify-content: space-around;
         padding: 1rem;
+        /* grid-template-columns: 1fr 2fr; */
     }
 
-    .footer .solutions, .support {
+    /* .footer .solutions, .support {
         display: none;
-    }
+    } */
 
     .footer .col-subscribe {
         margin: 2rem;

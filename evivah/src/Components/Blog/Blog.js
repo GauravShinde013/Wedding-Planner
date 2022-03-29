@@ -10,12 +10,12 @@ const blog={
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    margin:"30px 0"
+    margin:"30px 0",
+    padding:"10px 30px"
 }
 
 export default function Blog() {
 
-  const navigate = useNavigate();
 
   const [blogs, setBlogs] = useState([]);
 
@@ -44,25 +44,13 @@ export default function Blog() {
 
   return (
     <div style={blog} >
-      <Row md={3}>
+      <Row md={3} className="justify-content-center">
         {
           blogs.map((blog) => {
             return (<Post blog={blog} />)
           })
         }
       </Row>
-
-
-      {/* <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" />
-      <Post blog="Testing for blog title" /> */}
-
 
     </div>
   )

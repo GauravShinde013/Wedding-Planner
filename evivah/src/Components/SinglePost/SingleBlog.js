@@ -2,7 +2,9 @@ import moment from "moment";
 import { useLocation } from "react-router-dom";
 import "./singlePost.css";
 import Navbar from '../Navbar/Navbar'
-
+import blogProfilePic from '../../img/blogProfilePic.jpeg'
+import Footer from "../Footer/Footer";
+import blogImg from "../../img/post.jpg"
 
 const blogText = {
     fontSize: "20px",
@@ -11,6 +13,8 @@ const blogText = {
 
 export default function SinglePost() {
 
+    //TODO: Profile picture change every author
+    //TODO: Blog image change for every single blog
 
     const location = useLocation()
     const blog = location.state.blog
@@ -28,37 +32,36 @@ export default function SinglePost() {
                         <div className="single-blog-top-img">
                             <img
                                 className="singlePostImg"
-                                src={require("../assets/post.jpg")} alt="">
+                                src={blogImg} alt="">
 
                             </img>
                         </div>
-                        <div>
-
+                        <div className="single-blog-top-content">
                             <h1 className="singlePostTitle">
                                 {blog.title}
-                                <div className="singlePostEdit">
-                                    <i className="singlePostIcon far fa-edit"></i>
-                                    <i className="singlePostIcon fas fa-trash"></i>
-                                </div>
                             </h1>
 
                             <div className="singlePostInfo">
-                                <span className="singlePostAuthor">
-                                    Author :
-                                    <b>
-                                        &nbsp;{blog.authorFirstName + " " + blog.authorLastName}
-                                    </b>
-                                </span>
-                                <span className="singlePostDate">
-                                    {moment(blog.createdTimestamp).format('MMM DD, YYYY')} (
-                                    {moment(blog.createdTimestamp).fromNow()})
-                                </span>
-                                <span className="singlePostCity">
-                                    {blog.weddingCity}
-                                </span>
+                                <div className="blog-author-content" >
+                                    <img className="blog-author-img" src={blogProfilePic} alt="" />
+                                    <div className="blog-author-info">
+                                        <span className="singlePostAuthor">
+                                            <b>
+                                                {blog.authorFirstName + " " + blog.authorLastName}
+                                            </b>
+                                        </span>
+                                        <span className="singlePostDate">
+                                            {moment(blog.createdTimestamp).format('MMM DD, YYYY')}
+                                        </span>
+                                        <span style={{fontSize:"14px"}}>
+                                            {blog.weddingCity}
+                                        </span>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
 
@@ -74,6 +77,7 @@ export default function SinglePost() {
                     })}</p>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

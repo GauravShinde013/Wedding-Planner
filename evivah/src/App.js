@@ -8,6 +8,7 @@ import { useState } from "react";
 import UserRoles from "./Pages/UserRoles";
 import BlogHome from "./Pages/BlogHome";
 import SinglePost from "./Components/SinglePost/SingleBlog";
+import CreateBlog from "./Pages/CreateBlog";
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/user-roles" element={<UserRoles />} />
           <Route path="/blogs" element={<BlogHome />} />
           <Route path="/blogs/single-blog" element={<SinglePost />} />
+          <Route path="/create-blog" element={<CreateBlog />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

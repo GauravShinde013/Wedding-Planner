@@ -51,9 +51,9 @@ function Cards1() {
 
           <ul className='vendorcards__items'>
             {
-              data.map((card)=>{
+              data.map((card,index)=>{
                 return (
-                  <CardItem1 data={card} ></CardItem1>
+                  <CardItem1 key={index} data={card} ></CardItem1>
                 )
               })
             }

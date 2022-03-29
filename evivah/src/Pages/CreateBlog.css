@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.writeImg{
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.writeForm{
+    position: relative;
+    padding: 60px 10px;
+}
+
+.writeCity{
+    margin-left: 179px;
+    font-size: 20px;
+    padding: 20px;
+    width: 10vw; 
+}
+
+.writeFormGroup{
+    margin-left: 150px;  
+    display: flex;  
+    align-items: centre;
+}
+
+.writeIcon{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid;
+    display: flex;
+    align-items: centre;
+    justify-content: center;
+    font-size: 27.5px;
+    margin-top: 20px;
+    color: rgb(121, 118, 118);
+    cursor: pointer;    
+}
+
+.writeInput{
+    font-size: 15px;
+    padding: 8px;
+    width: 70vw;        
+}
+
+.writeInput:focus{
+    outline: none;
+}
+
+.writeText{
+    font-size: 22px;   
+    margin-left: 180px; 
+}
+
+.writeSubmit{
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    font-size: large;
+    color: antiquewhite;
+    background-color: teal;
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+}
+
+.create-blog-top{
+    display: flex;
+    flex-direction: row-reverse;
+    background-color: #eff3f2;
+    padding: 20px 40px;
+}
+
+.create-blog-top .create-blog-top-img{
+    flex: 2;
+}
+
+.create-blog-top .create-blog-top-content{
+    flex: 2;
+    width:50%;
+    align-self: center;
+    
+}
+.create-blog-top .create-blog-top-content h2{
+    width:70%;
+    align-self: center;
+    font-family: 'Great Vibes', cursive;
+    line-height: 1.3;
+    font-size:41px;
+    font-weight: 550;
+    word-spacing: 4.3px;
+}

@@ -3,6 +3,8 @@ import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import './style.css'
 
+
+
 const Footer = () => {
     return (
         <div className='footer'>
@@ -18,7 +20,7 @@ const Footer = () => {
                 </div>
                 <div className='col legal'>
                     <h6>Start Planning with Top Rated Vendors</h6>
-                    <ul>
+                    <ul className='top-vendors'>
                         <li><Link to='/'className='link'>Planners</Link></li>
                         <li><Link to='/'className='link'>Photographers</Link></li>
                         <li><Link to='/'className='link'>Makeup Artist</Link></li>
@@ -41,7 +43,6 @@ const Footer = () => {
 
                     </ul>
                 </div>
-                <div></div>
                 <div className='col-subscribe'>
                     <h6>Subscribe to our newsletter</h6>
                     <p>The latest news, articles, and resources sent to your inbox weekly.</p>
@@ -69,3 +70,9 @@ const Footer = () => {
 }
 
 export default Footer
+
+
+// display: grid;
+// grid-template-columns: repeat(2, 1fr);
+// grid-auto-rows: minmax(48px, auto);
+// column-gap: 14px;

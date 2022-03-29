@@ -35,9 +35,9 @@ function Blogs() {
 
           <ul className='card__items'>
             {
-              blogData.map((blog)=>{
+              blogData.map((blog,index)=>{
                 return(
-                  <Card blog={blog} ></Card>
+                  <Card blog={blog} key={index} ></Card>
                 )
               })
             }
