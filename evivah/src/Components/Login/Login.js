@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 
 
 const Login = ({ setUser }) => {
@@ -47,7 +48,6 @@ const Login = ({ setUser }) => {
 
       axios.post(url, body).then((response) => {
         const result = response.data
-        console.log(result)
         if (result['status'] === 'success') {
           const { id, firstName, lastName, email,role } = result['data']
           toast.success('Welcome, ' + firstName + " " + lastName)
@@ -81,7 +81,7 @@ const Login = ({ setUser }) => {
 
   return (
     <>
-      
+      <Navbar/>
       <div className="login">
         <h1 className="loginTitle">Choose a Login Method</h1>
         <div className="wrapper">

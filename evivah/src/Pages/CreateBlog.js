@@ -1,7 +1,7 @@
 import "./CreateBlog.css";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Navbar from '../Components/Navbar/Navbar'
 import Footer from "../Components/Footer/Footer";
@@ -50,36 +50,28 @@ export default function Write() {
     }
 
     else {
-      const body = {
-        title,
-        weddingCity,
-        description,
-        authorId,
-      };
-      console.log(body);
-
-      let jsonBodyData = {"blogData": {
-        title,
-        weddingCity,
-        description,
-        authorId,
-      } }
-
 
       formData.append("blogImg", imgFile)
 
-      formData.append('jsonBodyData', new Blob([JSON.stringify({
-        "title":title,"authorId":authorId,"description":description,"weddingCity":weddingCity
-      })], { type: 'application/json' }))
+      formData.append('jsonBodyData',
+        new Blob(
+          [JSON.stringify(
+            {
+              "title": title,
+              "authorId": authorId,
+              "description": description,
+              "weddingCity": weddingCity
+            })
+          ],
+          { type: 'application/json' }
+        ))
 
       const url = `http://localhost:8080/blog/add`
-      // console.log(formData.jsonBodyData);
-      axios.post(url,formData).then((response) => {
+      axios.post(url, formData).then((response) => {
         const result = response.data;
-        console.log(result);
         if (result["status"] === "success") {
           toast.success("New Blog Added..");
-          // navigate("/blogs");
+          navigate("/blogs");
         } else {
           toast.error(result["error"]);
         }

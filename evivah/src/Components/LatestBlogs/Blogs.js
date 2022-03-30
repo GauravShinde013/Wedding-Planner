@@ -27,6 +27,10 @@ function Blogs() {
       path:'/services',
     }
   ]
+
+  
+
+
     return (
       <div className='blog-card'>
       <h1>Latest Blogs</h1>

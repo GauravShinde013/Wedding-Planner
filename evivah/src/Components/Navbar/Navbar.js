@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
+import { useNavigate } from 'react-router-dom'
 
 const dropdownStyle = (theme) => ({
     fontSize: "20px",
@@ -25,7 +26,7 @@ const Navbar = () => {
 
 
     const loginStatus = sessionStorage['loginStatus']
-    const [user, setUser] = useState(!!loginStatus)
+    const [user, setUser] = useState(loginStatus)
 
 
     const [click, setClick] = useState(false)
@@ -33,22 +34,29 @@ const Navbar = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
+    const navigate = useNavigate();
+
     const handleDropDownClick = (event) => {
-        console.log(event.currentTarget);
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
 
-    const logoutHandler=()=>{
-        
-    }
+    const logoutHandler = () => {
+        // remove the logged users details from session storage
+        sessionStorage.removeItem('id')
+        sessionStorage.removeItem('firstName')
+        sessionStorage.removeItem('lastName')
+        sessionStorage.removeItem('loginStatus')
+    
+        // navigate to sign in component
+        navigate('/login')
+      }
 
 
     //FIXME: Navbar responsivnes
     //FIXME:Blog Vendor Buttons Disappeared
-    // TODO: Logout Button 
 
     return (
         <header>
@@ -80,7 +88,7 @@ const Navbar = () => {
 
 
 
-                    <li className='nav-item'>
+                    { user&&<li className='nav-item'>
                         <Button
                             id="fade-button"
                             aria-controls={open ? 'fade-menu' : undefined}
@@ -107,7 +115,7 @@ const Navbar = () => {
                             </MenuItem>
                             <MenuItem onClick={logoutHandler} >Logout</MenuItem>
                         </Menu>
-                    </li>
+                    </li>}
                 </ul>
 
 
