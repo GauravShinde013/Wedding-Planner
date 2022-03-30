@@ -41,7 +41,6 @@ export default function Blog() {
 
 
 
-
   return (
     <div style={blog} >
       <Row md={3} className="justify-content-center">

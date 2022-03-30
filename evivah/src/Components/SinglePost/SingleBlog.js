@@ -14,13 +14,11 @@ const blogText = {
 export default function SinglePost() {
 
     //TODO: Profile picture change every author
-    //TODO: Blog image change for every single blog
 
     const location = useLocation()
     const blog = location.state.blog
-    const blogPara = blog.description.split("\n\n");
-    console.log(blog.description);
-    console.log(blogPara);
+    const blogPara = blog.description.split("\n");
+   
 
 
     return (
@@ -32,8 +30,7 @@ export default function SinglePost() {
                         <div className="single-blog-top-img">
                             <img
                                 className="singlePostImg"
-                                src={blogImg} alt="">
-
+                                src={blog.blogImageLink} alt="">
                             </img>
                         </div>
                         <div className="single-blog-top-content">

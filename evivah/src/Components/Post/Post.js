@@ -1,6 +1,5 @@
 import "./post.css";
 import { useNavigate } from 'react-router'
-import blogImg from "../../img/post.jpg"
 
 export default function Post({ blog }) {
   blog.title=titleCase(blog.title)
@@ -26,7 +25,7 @@ const navigate=useNavigate()
     <div class="card m-1" style={{ width: "18rem" }}>
       <img
         className="post-img"
-        src={blogImg} alt="" />
+        src={blog.blogImageLink} alt="" />
       <div className="card-body">
         <h5 className="card-title">{blog.title}</h5>
         <p className="card-text">{blogTxt}</p>

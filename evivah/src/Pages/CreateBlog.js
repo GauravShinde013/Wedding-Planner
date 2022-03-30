@@ -12,9 +12,9 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 const imgStyle = {
   width: "100%",
-  height:"50vh",
+  height: "50vh",
 
-  objectFit:"cover"
+  objectFit: "cover"
 
 }
 export default function Write() {
@@ -30,6 +30,9 @@ export default function Write() {
   const navigate = useNavigate();
 
   const save = () => {
+
+    let formData = new FormData();
+
     if (title.length === 0) {
       toast.warning("Please Enter Title");
     } else if (weddingCity.length === 0) {
@@ -39,8 +42,11 @@ export default function Write() {
     } else if (imgFile === "") {
       toast.error("Please Upload Blog Image");
     }
-    else if (imgFile && (imgFile.type.includes("image/"))) {
+    else if (imgFile && !(imgFile.type.includes("image/"))) {
       toast.error("Invalid Image Type.")
+    }
+    else if ((imgFile.size / 1000000) > 10) {
+      toast.error("File Size Exceeded 10Mb.");
     }
 
     else {
@@ -49,17 +55,31 @@ export default function Write() {
         weddingCity,
         description,
         authorId,
-        imgFile
       };
-
-      const url = `http://localhost:8080/blog/add`;
       console.log(body);
-      axios.post(url, body).then((response) => {
+
+      let jsonBodyData = {"blogData": {
+        title,
+        weddingCity,
+        description,
+        authorId,
+      } }
+
+
+      formData.append("blogImg", imgFile)
+
+      formData.append('jsonBodyData', new Blob([JSON.stringify({
+        "title":title,"authorId":authorId,"description":description,"weddingCity":weddingCity
+      })], { type: 'application/json' }))
+
+      const url = `http://localhost:8080/blog/add`
+      // console.log(formData.jsonBodyData);
+      axios.post(url,formData).then((response) => {
         const result = response.data;
         console.log(result);
         if (result["status"] === "success") {
           toast.success("New Blog Added..");
-          navigate("/blogs");
+          // navigate("/blogs");
         } else {
           toast.error(result["error"]);
         }
@@ -133,7 +153,7 @@ export default function Write() {
             </Col>
             <Col md={4}>
               <Paper sx={{ width: "400px", padding: "40px 20px" }}>
-                <h4 style={{paddingBottom:"10px"}} > Image Preview </h4>
+                <h4 style={{ paddingBottom: "10px" }} > Image Preview </h4>
                 {imgFile && <img style={imgStyle} src={URL.createObjectURL(imgFile)} alt={imgFile.name} />}
               </Paper>
             </Col>
