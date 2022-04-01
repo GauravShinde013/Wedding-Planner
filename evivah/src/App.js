@@ -8,13 +8,17 @@ import { useState } from "react";
 import UserRoles from "./Pages/UserRoles";
 import BlogHome from "./Pages/BlogHome";
 import SinglePost from "./Components/SinglePost/SingleBlog";
+import Navbar from "./Components/Navbar/Navbar";
 import CreateBlog from "./Pages/CreateBlog";
+import MasterServicesHome from "./Pages/VendorOptions";
+import VendorsHome from "./Pages/VendorsHome";
+import VendorsListHome from "./Pages/VendorsListHome";
 
 
 
 function App() {
   const loginStatus = sessionStorage['loginStatus']
-  const [user,setUser]=useState(loginStatus)
+  const [user, setUser] = useState(loginStatus)
 
 
   return (
@@ -29,6 +33,9 @@ function App() {
           <Route path="/blogs" element={<BlogHome />} />
           <Route path="/blogs/single-blog" element={<SinglePost />} />
           <Route path="/create-blog" element={<CreateBlog />} />
+          <Route path="/vendor-options" element={<MasterServicesHome />} />
+          <Route path="/master-services" element={<VendorsHome />} />
+          <Route path="/vendors-list" element={<VendorsListHome />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

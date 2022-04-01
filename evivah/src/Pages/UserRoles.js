@@ -42,20 +42,20 @@ const UserRoles = () => {
     }
 
     return (
-        <div style={{ height: "100vh", paddingTop: "80px", backgroundImage: "linear-gradient(45deg,#f7f2eb,#dfdae8)", }}>
+        <div style={{  padding: "80px 0", backgroundImage: "linear-gradient(45deg,#f7f2eb,#dfdae8)", }}>
             <Container>
                 <h3 style={{ marginBottom: "75px",fontSize:"35px" }} className="text-center">Who Are You ?</h3>
                 <Row >
 
                     <Col md lg="2" sm={1}></Col>
-                    <Col sm md lg="3" >
+                    <Col className="d-flex justify-content-center pb-5"  >
                         <Paper sx={cardBackground} elevation={3} onClick={()=>rolesHandler("Planner")}>
                             <img style={imgStyle} src={plannerLogo} alt="" />
                             <h4 style={{ color: "#639" }} className="text-center">Planner</h4>
                         </Paper>
                     </Col>
 
-                    <Col sm md lg="3">
+                    <Col className="d-flex justify-content-center pb-5" >
                         <Paper sx={cardBackground} elevation={3} onClick={()=>rolesHandler("Customer")}>
                             <img style={imgStyle} src={clientLogo} alt="" />
                             <h4 style={{ color: "#639" }} className="text-center">
@@ -64,7 +64,7 @@ const UserRoles = () => {
                         </Paper>
                     </Col>
 
-                    <Col sm md lg="3">
+                    <Col className="d-flex justify-content-center pb-5" >
                         <Paper sx={cardBackground} elevation={3} onClick={()=>rolesHandler("Vendor")}>
                             <img style={imgStyle} src={vendorLogo} alt="" />
                             <h4 style={{ color: "#639" }} className="text-center">Vendor</h4>
