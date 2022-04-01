@@ -1,7 +1,8 @@
 import { Col, Container, Row } from 'react-bootstrap';
+import Imageslider from '../Components/Imageslider/Imageslider';
 import Navbar from '../Components/Navbar/Navbar';
 import Roles from '../Components/Roles';
-import plannerLogo from "../img/planner.svg";
+import plannerLogo from "../img/planner.png";
 import vendorLogo from "../img/vendor.png";
 import backgroundImg from "../img/vendorOptions.png";
 
@@ -20,6 +21,8 @@ const MasterServicesHome = () => {
   return (
     <div>
       <Navbar />
+        {/* <Imageslider/>  */}
+
       <div style={backStyle}>
         <Container>
 

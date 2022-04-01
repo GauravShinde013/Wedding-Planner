@@ -25,7 +25,7 @@ const tooltip={
 
 
 const imgStyle = {
-    width: "140px",
+    width: "156px",
     height: "300px",
     margin: "20px auto",
     backgroundSize: "contains",

@@ -95,7 +95,6 @@ const Signup = () => {
       axios.post(url, formData).then((response) => {
 
         const result = response.data
-        console.log(result)
         if (result['status'] === 'success') {
           toast.success('Welcome to Evivah Family , ' + firstName)
           navigate('/')

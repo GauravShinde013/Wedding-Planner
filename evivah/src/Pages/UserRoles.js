@@ -1,7 +1,7 @@
 import Paper from '@mui/material/Paper'
 import React from 'react'
 import  {Col,Row,Container}  from 'react-bootstrap'
-import plannerLogo from "../img/planner.svg"
+import plannerLogo from "../img/planner.png"
 import clientLogo from "../img/client.jpg"
 import vendorLogo from "../img/vendor.png"
 import { useNavigate } from 'react-router-dom'
@@ -25,7 +25,7 @@ const cardBackground = (theme) => ({
 
 
 const imgStyle = {
-    width: "140px",
+    width: "156px",
     minHeight: "300px",
     margin: "20px auto",
     backgroundSize: "contains",

@@ -13,6 +13,8 @@ import CreateBlog from "./Pages/CreateBlog";
 import MasterServicesHome from "./Pages/VendorOptions";
 import VendorsHome from "./Pages/VendorsHome";
 import VendorsListHome from "./Pages/VendorsListHome";
+import VendorProfile from "./Components/VendorProfile/VendorProfile"
+import PlannerHome from "./Pages/PlannerHome";
 
 
 
@@ -36,6 +38,8 @@ function App() {
           <Route path="/vendor-options" element={<MasterServicesHome />} />
           <Route path="/master-services" element={<VendorsHome />} />
           <Route path="/vendors-list" element={<VendorsListHome />} />
+          <Route path="/vendor-info" element={<VendorProfile />} />
+          <Route path="/planners" element={<PlannerHome />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

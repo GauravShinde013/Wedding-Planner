@@ -15,7 +15,7 @@ const MasterServices = ({ service }) => {
                 <img src={service.thumbnailLink} alt="" className='card-img-top' />
             </div>
             <div className="card-body-text-dark">
-                <h4 className="card-title">{service.serviceName}</h4>
+                <h4 className="service-card-title">{service.serviceName}</h4>
             </div>
         </div>
 
