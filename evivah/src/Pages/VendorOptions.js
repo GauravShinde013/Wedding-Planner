@@ -5,7 +5,7 @@ import Roles from '../Components/Roles';
 import plannerLogo from "../img/planner.png";
 import vendorLogo from "../img/vendor.png";
 import backgroundImg from "../img/vendorOptions.png";
-
+import MultiForm from "../Components/MultiForm/FormStepper"
 
 const backStyle = {
   padding: "115px 0",
@@ -21,7 +21,6 @@ const MasterServicesHome = () => {
   return (
     <div>
       <Navbar />
-        {/* <Imageslider/>  */}
 
       <div style={backStyle}>
         <Container>

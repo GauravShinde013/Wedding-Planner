@@ -1,20 +1,28 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
-const Imageslider = ({images}) => {
+
+const imgStyle = {
+  height: "358px",
+  objectFit: "cover"
+}
+
+const Imageslider = ({ images }) => {
   return (
     <div>
 
       <Carousel>
         <Carousel.Item>
           <img
+            style={imgStyle}
             className="d-block w-100"
             src={images[0]}
             alt="First slide"
           />
-         
+
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={imgStyle}
             className="d-block w-100"
             src={images[1]}
             alt="Second slide"
@@ -22,6 +30,7 @@ const Imageslider = ({images}) => {
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={imgStyle}
             className="d-block w-100"
             src={images[2]}
             alt="Third slide"
@@ -29,6 +38,7 @@ const Imageslider = ({images}) => {
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={imgStyle}
             className="d-block w-100"
             src={images[3]}
             alt="fourth slide"
@@ -36,6 +46,7 @@ const Imageslider = ({images}) => {
         </Carousel.Item>
         <Carousel.Item>
           <img
+          style={imgStyle}
             className="d-block w-100"
             src={images[4]}
             alt="fifth slide"
@@ -48,3 +59,6 @@ const Imageslider = ({images}) => {
 }
 
 export default Imageslider; 
+
+
+

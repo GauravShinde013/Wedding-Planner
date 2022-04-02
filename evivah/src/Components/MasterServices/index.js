@@ -2,13 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 
-const MasterServices = ({ service }) => {
+const MasterServices = ({ service}) => {
     
     const navigate=useNavigate()
 
-    const vendorHandler=()=>{
-        navigate("/vendors-list",{state:{serviceId:service.id}})
+    const vendorHandler=(e)=>{
+            navigate("/vendors-list",{state:{serviceId:service.id}})
     }
+
     return (
         <div onClick={vendorHandler} className="card text-center shadow">
             <div className="overflow service-img">

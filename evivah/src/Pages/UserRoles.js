@@ -49,7 +49,7 @@ const UserRoles = () => {
 
                     <Col md lg="2" sm={1}></Col>
                     <Col className="d-flex justify-content-center pb-5"  >
-                        <Paper sx={cardBackground} elevation={3} onClick={()=>rolesHandler("Planner")}>
+                        <Paper sx={cardBackground} elevation={3} onClick={()=>rolesHandler("Vendor")}>
                             <img style={imgStyle} src={plannerLogo} alt="" />
                             <h4 style={{ color: "#639" }} className="text-center">Planner</h4>
                         </Paper>

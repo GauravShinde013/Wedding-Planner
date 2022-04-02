@@ -10,7 +10,6 @@ import VendorCard from '../Components/VendorsList/VendorCard';
 import sorryImage from "../img/sorryImage.png"
 
 const VendorsListHome = () => {
-    //TODO: No Vendors Message
     const [vendorsList, setVendorsList] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -68,12 +67,20 @@ const VendorsListHome = () => {
         getVendorsByMasterId()
     }, [])
 
-    console.log(vendorsList);
+    const Loading = () => {
+        return (
+          <div className="d-flex align-items-center justify-content-center" >
+            <Spinner animation="border" />
+            <h4 style={{ paddingLeft: "7px" }}>
+              Please Wait we are fetching Vendors For You
+            </h4>
+          </div>
+        )
+      }
  
     return (
         <div>
             <Navbar />
-            {/* <Spinner  animation="border" /> */}
             <div>
                 <Container className="py-4">
                     <Row className="g-4">
@@ -88,7 +95,7 @@ const VendorsListHome = () => {
                                 <div>
                                     {NoVendor()}
                                 </div>
-                            )) : <Spinner  animation="border" />
+                            )) : Loading()  
                         }
                     </Row>
                 </Container>

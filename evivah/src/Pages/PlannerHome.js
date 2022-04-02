@@ -23,8 +23,16 @@ const PlannerHome = () => {
         getPlanners()
     }, [])
 
-    console.log(plannersList);
-
+    const Loading = () => {
+        return (
+          <div className="d-flex align-items-center justify-content-center" >
+            <Spinner animation="border" />
+            <h4 style={{ paddingLeft: "7px" }}>
+              Please Wait we are fetching Planners For You
+            </h4>
+          </div>
+        )
+      }
   return (
     <div>
         <Navbar/>
@@ -39,7 +47,7 @@ const PlannerHome = () => {
                                         <VendorCard key={vendor.serviceId} vendor={vendor} />
                                     </Col>
                                 )
-                            }) : <Spinner  animation="border" />
+                            }) : Loading()
                         }
                     </Row>
                 </Container>

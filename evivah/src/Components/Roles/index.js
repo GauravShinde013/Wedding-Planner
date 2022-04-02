@@ -19,7 +19,7 @@ const cardBackground = (theme) => ({
 
 })
 
-const tooltip={
+const tooltip = {
     fontSize: "20px!important"
 }
 
@@ -36,20 +36,25 @@ const RolesCard = ({ title, src, msg }) => {
 
     const navigate = useNavigate();
     const rolesHandler = (role) => {
-        if(role==="Vendor"){
+        if (role === "Vendor") {
             navigate("/master-services")
         }
-        else{
+        else {
             navigate("/planners")
         }
     }
 
     return (
         <div className="pb-3">
-            <Tooltip  arrow style={tooltip} title={msg} placement="top">
+            <Tooltip arrow style={tooltip} title={msg} placement="top">
                 <Paper sx={cardBackground} elevation={3} onClick={() => rolesHandler(title)}>
                     <img style={imgStyle} src={src} alt="" />
-                    <h4 style={{ color: "#639" }} className="text-center">{title}</h4>
+                    <h4
+                        style={{ color: "#639" }}
+                        className="text-center"
+                    >
+                        {title}
+                    </h4>
                 </Paper>
             </Tooltip>
         </div>

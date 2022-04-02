@@ -15,6 +15,8 @@ import VendorsHome from "./Pages/VendorsHome";
 import VendorsListHome from "./Pages/VendorsListHome";
 import VendorProfile from "./Components/VendorProfile/VendorProfile"
 import PlannerHome from "./Pages/PlannerHome";
+import MultiStepForm from "./Pages/MultiStepForm";
+import VendorProfileHome from "./Pages/VendorProfileHome";
 
 
 
@@ -40,6 +42,8 @@ function App() {
           <Route path="/vendors-list" element={<VendorsListHome />} />
           <Route path="/vendor-info" element={<VendorProfile />} />
           <Route path="/planners" element={<PlannerHome />} />
+          <Route path="/vendor-details" element={<MultiStepForm />} />
+          <Route path="/vendor-dashboard" element={<VendorProfileHome />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

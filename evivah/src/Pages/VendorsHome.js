@@ -1,29 +1,42 @@
 import { Paper } from '@mui/material';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import Footer from '../Components/Footer/Footer';
 import MasterServices from "../Components/MasterServices"
 import Navbar from '../Components/Navbar/Navbar';
 
 const VendorsHome = () => {
   const [masterServices, setMasterServices] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  const getMasterServices = () => {
+  const getMasterServices = async () => {
     const url = `http://localhost:8080/masterServices`
-    axios.get(url).then((response) => {
+    const data = await axios.get(url).then((response) => {
       let result = response.data.data
-      result = result.filter((service,index) => {
+      result = result.filter((service, index) => {
         return (service.serviceName !== "Planner")
       })
 
       setMasterServices(result)
     })
+    setLoading(true)
   }
 
   useEffect(() => {
     getMasterServices()
   }, [])
+
+  const Loading = () => {
+    return (
+      <div className="d-flex align-items-center justify-content-center" >
+        <Spinner animation="border" />
+        <h4 style={{ paddingLeft: "7px" }}>
+          Please Wait Services are Loading
+        </h4>
+      </div>
+    )
+  }
 
   return (
     <div className="m-body">
@@ -32,8 +45,8 @@ const VendorsHome = () => {
 
         <Container className="py-4" >
           <h3 className='text-white mb-5 text-center py-3 bg-dark service-head'>Go Ahead And Customize Your Weddding</h3>
-          <Paper elevation={12} sx={{padding:"20px"}}>
-            <Row  className="g-4">
+          {loading ? <Paper elevation={12} sx={{ padding: "20px" }}>
+            <Row className="g-4">
               {
                 masterServices.map((service) => {
                   return (
@@ -44,11 +57,12 @@ const VendorsHome = () => {
                 })
               }
             </Row>
-          </Paper>
+          </Paper> : Loading()
+          }
         </Container>
-      </div>
-      <Footer/>
-    </div>
+      </div >
+      <Footer />
+    </div >
   )
 }
 

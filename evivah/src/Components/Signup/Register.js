@@ -96,8 +96,13 @@ const Signup = () => {
 
         const result = response.data
         if (result['status'] === 'success') {
-          toast.success('Welcome to Evivah Family , ' + firstName)
-          navigate('/')
+          // toast.success('Welcome to Evivah Family , ' + firstName)
+          if(role==="Customer"){
+            navigate('/cust-contact-info')
+          }
+          else{
+            navigate('/vendor-details')
+          }
         } else {
           toast.error(result['error'])
         }
