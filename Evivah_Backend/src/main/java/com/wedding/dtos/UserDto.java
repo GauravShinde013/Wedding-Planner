@@ -15,8 +15,13 @@ public class UserDto {
 	private String role;
 	
 	private MultipartFile profilePic;
+	
 	private String profilePicUrl;
+	
 	private String city;
+	private String addressLine;
+	private int pincode;
+	private String state;
 	private Date createdTimestamp;
 	
 	public UserDto() {
@@ -38,6 +43,28 @@ public class UserDto {
 	}
 	
 	
+
+
+	public UserDto(int id, String firstName, String lastName, String email, String mobile, String password, String role,
+			MultipartFile profilePic, String profilePicUrl, String city, String addressLine, int pincode,
+			String state, Date createdTimestamp) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.mobile = mobile;
+		this.password = password;
+		this.role = role;
+		this.profilePic = profilePic;
+		this.profilePicUrl = profilePicUrl;
+		this.city = city;
+		this.addressLine = addressLine;
+		this.pincode = pincode;
+		this.state = state;
+		this.createdTimestamp = createdTimestamp;
+	}
+
 
 
 	public UserDto(int id, String firstName, String lastName, String email, String mobile, String password, String role,
@@ -174,12 +201,53 @@ public class UserDto {
 
 
 
+	public String getAddressLine() {
+		return addressLine;
+	}
+
+
+
+	public void setAddressLine(String addressLine) {
+		this.addressLine = addressLine;
+	}
+
+
+
+	public int getPincode() {
+		return pincode;
+	}
+
+
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
+	}
+
+
+
+	public String getState() {
+		return state;
+	}
+
+
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", mobile=" + mobile + ", password=" + password + ", role=" + role + ", city=" + city
-				+ ", createdTimestamp=" + createdTimestamp + "]";
+				+ ", mobile=" + mobile + ", password=" + password + ", role=" + role + ", profilePic=" + profilePic
+				+ ", profilePicUrl=" + profilePicUrl + ", city=" + city + ", addressLine=" + addressLine + ", pincode="
+				+ pincode + ", state=" + state + ", createdTimestamp=" + createdTimestamp + "]";
 	}
+
+
+
+
 
 	
 

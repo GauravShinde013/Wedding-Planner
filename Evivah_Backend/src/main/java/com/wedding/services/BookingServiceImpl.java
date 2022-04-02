@@ -68,6 +68,7 @@ public class BookingServiceImpl {
 
 	public String addNewBooking(CustomizeBookingDto dto) {
 		Booking booking = converter.toBookingEntity(dto);
+		System.out.println(booking.toString());
 		Booking insertedBooking = dao.save(booking);
 		if (insertedBooking != null) {
 			return "Booking Added Successfully";

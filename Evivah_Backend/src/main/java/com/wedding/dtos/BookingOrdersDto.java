@@ -12,7 +12,6 @@ public class BookingOrdersDto {
 
 	
 	public BookingOrdersDto(int orderId, int vendorServiceDetailsId, int bookingId) {
-		super();
 		this.orderId = orderId;
 		this.vendorServiceDetailsId = vendorServiceDetailsId;
 		this.bookingId = bookingId;

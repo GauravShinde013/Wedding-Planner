@@ -84,6 +84,11 @@ public class Photos {
 	public void setVendorPhotos(VendorServiceDetails vendorPhotos) {
 		this.vendorPhotos = vendorPhotos;
 	}
+
+	@Override
+	public String toString() {
+		return "Photos [id=" + id + ", imageLink=" + imageLink + ", createdTimestamp=" + createdTimestamp + "]";
+	}
 	
 	
 

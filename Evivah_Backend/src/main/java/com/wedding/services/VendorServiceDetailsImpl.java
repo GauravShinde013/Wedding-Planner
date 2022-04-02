@@ -29,15 +29,17 @@ public class VendorServiceDetailsImpl {
 
 	}
 
-	public List<VendorServiceDetails> findServiceDetailsByVendorId(int vendorId) {
+	public List<VendorServiceDetailsDto> findServiceDetailsByVendorId(int vendorId) {
 		List<VendorServiceDetails> allServices = serviceDetailsDao.findByUserId(vendorId);
-		return allServices;
+		List<VendorServiceDetailsDto> dto=allServices.stream().map((service)->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
+		
+		return dto;
 
 	}
 
 	public String saveServiceDetails(VendorServiceDetailsDto vsDetails) {
 		VendorServiceDetails details = converter.toVendorServiceDetailsEntity(vsDetails);
-
+		System.out.println("Service: "+details.toString());
 		serviceDetailsDao.save(details);
 		return "Service Added....";
 	}

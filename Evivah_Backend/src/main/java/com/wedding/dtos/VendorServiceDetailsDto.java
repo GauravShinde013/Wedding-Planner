@@ -18,7 +18,10 @@ public class VendorServiceDetailsDto {
 	private String lastName;
 	private String profilePicLink;
 	private String vendorCity;
+	
 	private List<String> imgList;
+	
+	
 	private List<ServiceFeedbackDto> feedbackList;
 	
 	
@@ -222,15 +225,18 @@ public class VendorServiceDetailsDto {
 	public void setFeedbackList(List<ServiceFeedbackDto> feedbackList) {
 		this.feedbackList = feedbackList;
 	}
- 
+	
+
 
 	@Override
 	public String toString() {
 		return "VendorServiceDetailsDto [serviceId=" + serviceId + ", brandName=" + brandName + ", specification="
 				+ specification + ", description=" + description + ", servicePrice=" + servicePrice
-				+ ", masterServiceId=" + masterServiceId + ", masterServiceName="
-				+ masterServiceName + ", userId=" + userId + ", isApproved=" + isApproved + ", createdTimestamp="
-				+ createdTimestamp + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+				+ ", masterServiceId=" + masterServiceId + ", masterServiceName=" + masterServiceName + ", userId="
+				+ userId + ", isApproved=" + isApproved + ", createdTimestamp=" + createdTimestamp + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", profilePicLink=" + profilePicLink + ", vendorCity="
+				+ vendorCity + ", imgList=" + imgList +  ", feedbackList="
+				+ feedbackList + "]";
 	}
 
 

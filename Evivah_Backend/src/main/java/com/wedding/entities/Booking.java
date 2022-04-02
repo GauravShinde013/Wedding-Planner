@@ -205,14 +205,14 @@ public class Booking {
 	
 
 
-	@Override
-	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName=" + groomsName
-				+ ", guestCount=" + guestCount + ", weddingDate=" + weddingDate + ", weddingCity=" + weddingCity
-				+ ", payAmount=" + payAmount + ", payStatus=" + payStatus + ", orders=" + orders + ", client=" + client
-				+ ", weddingStatus=" + weddingStatus + ", createdtimestamp=" + createdtimestamp + "]";
-	}
-	
+//	@Override
+//	public String toString() {
+//		return "Booking [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName=" + groomsName
+//				+ ", guestCount=" + guestCount + ", weddingDate=" + weddingDate + ", weddingCity=" + weddingCity
+//				+ ", payAmount=" + payAmount + ", payStatus=" + payStatus + ", orders=" + orders + ", client=" + client
+//				+ ", weddingStatus=" + weddingStatus + ", createdtimestamp=" + createdtimestamp + "]";
+//	}
+//	
 	
 	
 	

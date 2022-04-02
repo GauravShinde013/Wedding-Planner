@@ -1,12 +1,8 @@
 package com.wedding.dtos;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 import org.springframework.stereotype.Component;
 
@@ -32,6 +28,12 @@ public class DtoEntityConverter {
 		dto.setMobile(user.getMobile());
 		dto.setPassword(user.getPassword());
 		dto.setRole(user.getRole());
+		dto.setCity(user.getCity());
+		dto.setAddressLine(user.getAddressLine());
+		dto.setPincode(user.getPincode());
+		dto.setState(user.getState());
+		dto.setCreatedTimestamp(user.getCreatedTimestamp());
+		dto.setProfilePicUrl(user.getProfileImage());
 		return dto;
 
 	}
@@ -100,7 +102,7 @@ public class DtoEntityConverter {
 	public ServiceFeedbackDto toReviewRatingDto(RatingReviews review) {
 
 		ServiceFeedbackDto feedbackDto = new ServiceFeedbackDto();
-		
+
 		feedbackDto.setRatingId(review.getRatingId());
 		feedbackDto.setCustomerId(review.getCustomer().getId());
 		feedbackDto.setRating(review.getRating());
@@ -144,13 +146,31 @@ public class DtoEntityConverter {
 		service.setMasterService(new MasterServices(dto.getMasterServiceId()));
 		service.setUser(new User(dto.getUserId()));
 
+		List<Photos> photosList = dto.getImgList().stream().map((link) -> toPhotosEntity(link))
+				.collect(Collectors.toList());
+
+		for (Photos p : photosList) {
+			service.addPhotos(p);
+		}
+//		List<Photos> photosList=dto.getSaveImgList().stream().map((photoDto)->toPhotosEntity(photoDto)).collect(Collectors.toList());
+//		
+//		for (Photos p : photosList) {
+//			service.addPhotos(p);
+//		}
+
 		return service;
+	}
+
+	public Photos toPhotosEntity(String url) {
+		Photos photo = new Photos();
+		photo.setImageLink(url);
+		return photo;
 	}
 
 //	WHILE DISPLAYING VENDOR SERVICE DETAILS
 	public VendorServiceDetailsDto toVendorServiceDetailsDto(VendorServiceDetails service) {
 		VendorServiceDetailsDto dto = new VendorServiceDetailsDto();
-		
+
 		dto.setServiceId(service.getVendorServiceDetailsId());
 		dto.setBrandName(service.getBrandName());
 		dto.setSpecification(service.getSpecification());
@@ -170,11 +190,11 @@ public class DtoEntityConverter {
 		List<ServiceFeedbackDto> feedbackList = new ArrayList<>();
 		service.getFeedback().stream().forEach((feedback) -> {
 			ServiceFeedbackDto feedbackDto = new ServiceFeedbackDto();
-			
-			feedbackDto=toReviewRatingDto(feedback);
+
+			feedbackDto = toReviewRatingDto(feedback);
 			feedbackList.add(feedbackDto);
 		});
-		
+
 		dto.setFeedbackList(feedbackList);
 		return dto;
 	}
@@ -211,7 +231,7 @@ public class DtoEntityConverter {
 		dto.setCustomerId(booking.getClient().getId());
 		dto.setCustomerFirstName(booking.getClient().getFirstName());
 		dto.setCustomerLastName(booking.getClient().getLastName());
-		dto.setOrders(null);
+//		dto.setOrders(booking.getOrders());
 
 		List<VendorServiceDetailsDto> vdto = booking.getOrders().stream()
 				.map(order -> toVendorServiceDetailsDto(order.getVendorService())).collect(Collectors.toList());
@@ -267,9 +287,10 @@ public class DtoEntityConverter {
 		booking.setPayAmount(dto.getPayAmount());
 		booking.setPayStatus(dto.isPayStatus());
 		booking.setClient(new User(dto.getCustomerId()));
+
 		List<Orders> ordersList = dto.getOrders().stream().map(order -> toOrdersEntity(order))
 				.collect(Collectors.toList());
-
+		
 		for (Orders o : ordersList) {
 			booking.addOrders(o);
 		}

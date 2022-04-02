@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,7 +17,6 @@ import com.wedding.dtos.ChangePasswordDto;
 import com.wedding.dtos.Credentials;
 import com.wedding.dtos.Response;
 import com.wedding.dtos.UserDto;
-import com.wedding.entities.User;
 import com.wedding.services.PhotoServiceImpl;
 import com.wedding.services.UserServiceImpl;
 
@@ -57,16 +57,16 @@ public class UserController {
 	
 //Update User
 	@PutMapping("/user/{id}")
-	public ResponseEntity<?> updateUser(@PathVariable("id") int userId,@RequestBody User user ){
+	public ResponseEntity<?> updateUser(@PathVariable("id") int userId,@RequestBody UserDto user ){
 		user.setId(userId);
-		System.out.println(userId);
+
 		UserDto userUpdated=userService.updateUserById(user);
 		
 		return Response.success(userUpdated);
 		
 	}
 	
-//Update User
+//Update password
 	@PutMapping("/user/changePassword")
 	public ResponseEntity<?> updatePassword(@RequestBody ChangePasswordDto dto ){
 
@@ -75,7 +75,14 @@ public class UserController {
 		String updatedPassMsg=userService.changePassword(dto);
 		
 		return Response.success(updatedPassMsg);
-//		return null;
+	}
+	
+//Get User By Id	
+	@GetMapping("/user/get/{id}")
+	public ResponseEntity<?> getUserById(@PathVariable("id") int userId ){
+		UserDto user=userService.findUserById(userId);
+		
+		return Response.success(user);
 	}
 
 	

@@ -67,6 +67,7 @@ public class BookingController {
 //		Add Bookings
 		@PostMapping("/bookings/add")
 		public ResponseEntity<?> addNewBooking(@RequestBody CustomizeBookingDto dto){
+			System.out.println(dto.toString());
 			String addedBooking=service.addNewBooking(dto);
 			return Response.success(addedBooking);
 		}

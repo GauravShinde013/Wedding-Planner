@@ -1,5 +1,6 @@
 package com.wedding.controller;
 import java.time.LocalDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import com.wedding.dtos.Response;
+
 import lombok.extern.slf4j.Slf4j;
 
-@ControllerAdvice
+//@ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -40,9 +43,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<?> emailExistsHandler(DataIntegrityViolationException ex){	
-		ExceptionResponse response = new ExceptionResponse();
         LogErrors(ex,"Duplicate Entry");
-		return Response.error("Email already exists");
+		return Response.error("Data Integrity Error ");
 	}
 	
 	@ExceptionHandler(NotFoundException.class)
@@ -94,7 +96,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public void LogErrors(Exception ex,String msg) {
 		log.error("\n=======================================================================================================");
 		log.error("\nSome Error Occurred: ");
-		log.equals(msg);
+		log.error(msg);
 		log.error("\nTechnical Details: "+ex.getMessage());
 		
 	}

@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wedding.daos.IUserDao;
 import com.wedding.dtos.Response;
 import com.wedding.dtos.UserDto;
 import com.wedding.dtos.VendorServiceDetailsDto;
-import com.wedding.entities.User;
 import com.wedding.services.UserServiceImpl;
 import com.wedding.services.VendorServiceDetailsImpl;
 
@@ -65,21 +63,21 @@ public class AdminController {
 	
 	
 	
-//	Count of Vendors
+//	Count of Vendors Services
 	@GetMapping("/admin/vendor/count")
-	public ResponseEntity<?> getCountOfVendors (){
+	public ResponseEntity<?> getCountOfAllVendorServices (){
 		long vendorsCount =vendorService.getVendorsCount();
 		return Response.success(vendorsCount);
 		
 	}
-//	Count of Planners
+//	Count of Planners Services
 	@GetMapping("/admin/planners/count")
-	public ResponseEntity<?> getCountOfPlanners(){
+	public ResponseEntity<?> getCountOfAllPlanners(){
 		long plannersCount =vendorService.getPlannersCount();
 		return Response.success(plannersCount);
 		
 	}
-//	Count of Planners
+//	Count of Customers
 	@GetMapping("/admin/customers/count")
 	public ResponseEntity<?> getCountOfCustomers(){
 		long plannersCount =userService.customersCount();

@@ -23,6 +23,8 @@ public class MasterServiceImpl {
 	private IMasterServiceDao dao;
 	@Autowired
 	private DtoEntityConverter converter;
+	@Autowired
+	private PhotoServiceImpl photoService;
 
 //	public List<VendorServiceDetails> getAllVendorServiceDetailsByMasterId(int id) {
 //		MasterServices specificMasterServices = dao.findByMasterId(id);
@@ -52,7 +54,9 @@ public class MasterServiceImpl {
 	}
 
 	public String addNewServicePhoto(MasterServicePhotoDto dto) {
-
+		String url=photoService.upload(dto.getmServicePhoto());
+		dto.setmServiceLink(url);
+		
 		MasterServices service = converter.toMasterServicePhotosEntity(dto);
 		dao.save(service);
 
