@@ -17,7 +17,7 @@ public class CustomizeBookingDto {
 	private int customerId;
 	private String customerFirstName;
 	private String customerLastName;
-	private boolean weddingStatus;
+
 
 	List<BookingOrdersDto> orders;
 
@@ -26,10 +26,17 @@ public class CustomizeBookingDto {
 	public CustomizeBookingDto() {
 		this.serviceDetailsList = new ArrayList<>();
 	}
+	
+
+	public CustomizeBookingDto(List<BookingOrdersDto> orders) {
+		super();
+		this.orders = orders;
+	}
+
 
 	public CustomizeBookingDto(int bookingId, String bridesName, String groomsName, long guestCount, double payAmount,
 			boolean payStatus, String weddingCity, Date weddingDate, int customerId, String customerFirstName,
-			String customerLastName, boolean weddingStatus, List<BookingOrdersDto> orders,
+			String customerLastName, List<BookingOrdersDto> orders,
 			List<VendorServiceDetailsDto> serviceDetailsList) {
 		super();
 		this.bookingId = bookingId;
@@ -43,7 +50,7 @@ public class CustomizeBookingDto {
 		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
-		this.weddingStatus = weddingStatus;
+		
 		this.orders = orders;
 		this.serviceDetailsList = serviceDetailsList;
 	}
@@ -55,16 +62,6 @@ public class CustomizeBookingDto {
 	public void setOrders(List<BookingOrdersDto> orders) {
 		this.orders = orders;
 	}
-
-	public boolean isWeddingStatus() {
-		return weddingStatus;
-	}
-
-	public void setWeddingStatus(boolean weddingStatus) {
-		this.weddingStatus = weddingStatus;
-	}
-
-	
 
 	public int getCustomerId() {
 		return customerId;
@@ -170,15 +167,4 @@ public class CustomizeBookingDto {
 	}
 	
 	
-
-//	@Override
-//	public String toString() {
-//		return "CustomizeBookingDto [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName="
-//				+ groomsName + ", guestCount=" + guestCount + ", payAmount=" + payAmount + ", payStatus=" + payStatus
-//				+ ", weddingCity=" + weddingCity + ", weddingDate=" + weddingDate + ", customerId=" + customerId
-//				+ ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
-//				+ ", weddingStatus=" + weddingStatus + ", orders=" + orders + ", serviceDetailsList="
-//				+ serviceDetailsList + "]";
-//	}
-
 }

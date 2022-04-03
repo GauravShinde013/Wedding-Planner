@@ -85,11 +85,6 @@ public class UserController {
 		return Response.success(user);
 	}
 
-	
-	
-
-
-
 }
 
 

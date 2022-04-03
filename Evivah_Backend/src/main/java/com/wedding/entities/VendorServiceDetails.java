@@ -170,14 +170,7 @@ public class VendorServiceDetails {
 	public void setBooking(List<Orders> booking) {
 		this.booking = booking;
 	}
-//	public List<Booking> getBooking() {
-//		return booking;
-//	}
-//	
-//	
-//	public void setBooking(List<Booking> booking) {
-//		this.booking = booking;
-//	}
+
 
 	public List<Photos> getImgList() {
 		return imgList;
@@ -207,5 +200,33 @@ public class VendorServiceDetails {
 				+ servicePrice + ", isApproved=" + isApproved + ", createdTimestamp=" + createdTimestamp + ", imgList="
 				+ imgList + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public List<Booking> getBooking() {
+//	return booking;
+//}
+//
+//
+//public void setBooking(List<Booking> booking) {
+//	this.booking = booking;
+//}
 
 }

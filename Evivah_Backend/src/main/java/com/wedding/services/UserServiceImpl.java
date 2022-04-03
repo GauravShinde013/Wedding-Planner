@@ -101,10 +101,12 @@ public class UserServiceImpl {
 
 	public List<UserDto> showAllCustomers() {
 		List<User> customers = userDao.findAll();
+		customers = customers.stream().filter(customer -> customer.getRole()!=null).collect(Collectors.toList());
 		customers.stream().forEach((user)->System.out.println(user.getRole()));
 		System.out.println("Dto");
 		List<UserDto> dto = customers.stream().filter(customer -> customer.getRole().equalsIgnoreCase("Customer"))
 				.map(customer -> converter.toCustomerDto(customer)).collect(Collectors.toList());
+	
 		System.out.println("Dto");
 		dto.stream().forEach((user)->System.out.println(user.toString()));
 		return dto;
@@ -115,16 +117,17 @@ public class UserServiceImpl {
 	}
 
 	public List<UserDto> lastFiveCustomers() {
-		List<User> customers = userDao.findTop5ByOrderByCreatedTimestampDesc();
-		List<UserDto> dto = customers.stream().filter(customer -> customer.getRole().equalsIgnoreCase("Customer"))
+		List<User> customers = userDao.findTop5ByRoleOrderByCreatedTimestampDesc("Customer");
+		List<UserDto> dto = customers.stream()
 				.map(customer -> converter.toCustomerDto(customer)).collect(Collectors.toList());
+
 
 		return dto;
 	}
 
 	public List<UserDto> lastFiveVendors() {
-		List<User> customers = userDao.findTop5ByOrderByCreatedTimestampDesc();
-		List<UserDto> dto = customers.stream().filter(customer -> customer.getRole().equalsIgnoreCase("Vendor"))
+		List<User> customers = userDao.findTop5ByRoleOrderByCreatedTimestampDesc("Vendor");
+		List<UserDto> dto = customers.stream()
 				.map(customer -> converter.toCustomerDto(customer)).collect(Collectors.toList());
 
 		return dto;

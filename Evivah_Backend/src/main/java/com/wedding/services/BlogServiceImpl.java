@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.wedding.daos.IBlogDao;
 import com.wedding.dtos.BlogDto;
 import com.wedding.dtos.DtoEntityConverter;
@@ -77,7 +78,11 @@ public class BlogServiceImpl {
 	
 	public List<BlogDto> findBlogsOfAuthor(int id){
 		List<Blog> authorBlog=dao.findByAuthorId(id);
+		if(!authorBlog.isEmpty()) {
 		return authorBlog.stream().map(blog->(converter.toBlogDto(blog))).collect(Collectors.toList());
+		}else {
+			throw new NotFoundException("Author id invalid");
+		}
 	}
 	
 	public List<BlogDto> lastThreeBlogs(){

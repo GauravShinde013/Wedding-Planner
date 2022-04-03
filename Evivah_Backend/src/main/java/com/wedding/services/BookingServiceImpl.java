@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.wedding.daos.IBookingDao;
 import com.wedding.dtos.CustomizeBookingDto;
 import com.wedding.dtos.DtoEntityConverter;
@@ -21,9 +22,6 @@ public class BookingServiceImpl {
 	private IBookingDao dao;
 	@Autowired
 	private DtoEntityConverter converter;
-	
-	
-	
 
 	public CustomizeBookingDto getByBookingId(int id) {
 		Booking book = dao.findByBookingId(id);
@@ -31,16 +29,16 @@ public class BookingServiceImpl {
 		return dto;
 	}
 
-	
-	
 	public List<CustomizeBookingDto> getByCustomerId(int id) {
 		List<Booking> bookingList = dao.findByClientId(id);
-		List<CustomizeBookingDto> dto = bookingList.stream().map(book -> converter.toCustomizeBookingDto(book))
-				.collect(Collectors.toList());
+		List<CustomizeBookingDto> dto = null;
+		if (!bookingList.isEmpty()) {
+			dto = bookingList.stream().map(book -> converter.toCustomizeBookingDto(book)).collect(Collectors.toList());
+		} else {
+			throw new NotFoundException("Customer id invalid");
+		}
 		return dto;
 	}
-	
-	
 
 	public List<CustomizeBookingDto> getAllBookings() {
 		List<Booking> booking = dao.findAll();
@@ -49,16 +47,12 @@ public class BookingServiceImpl {
 		return bookingList;
 	}
 
-	
-	
 	public List<CustomizeBookingDto> getRecentBookings() {
 		List<Booking> booking = dao.findTop5ByOrderByCreatedtimestampDesc();
 		List<CustomizeBookingDto> bookingList = booking.stream().map(book -> converter.toCustomizeBookingDto(book))
 				.collect(Collectors.toList());
 		return bookingList;
 	}
-	
-	
 
 	public DoubleSummaryStatistics getAllBookingsStatistics() {
 		DoubleSummaryStatistics stats = getAllBookings().stream().mapToDouble((book) -> (book.getPayAmount()))

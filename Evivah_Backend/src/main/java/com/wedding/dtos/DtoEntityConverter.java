@@ -213,6 +213,11 @@ public class DtoEntityConverter {
 		dto.setProfilePicUrl(user.getProfileImage());
 		dto.setCity(user.getCity());
 		dto.setCreatedTimestamp(user.getCreatedTimestamp());
+		dto.setAddressLine(user.getAddressLine());
+        dto.setState(user.getState());
+        dto.setPincode(user.getPincode());
+        dto.setCreatedTimestamp(user.getCreatedTimestamp());
+        dto.setRole(user.getRole());
 
 		return dto;
 	}

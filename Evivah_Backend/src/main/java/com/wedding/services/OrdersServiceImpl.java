@@ -31,14 +31,17 @@ public class OrdersServiceImpl {
 	public OrderDto getByOrderId(int id) {
 		Orders order= dao.findByOrderId(id);
 		return converter.toOrderDto(order);
-		
 	}
+	
 	public List<OrderDto> getAllOrdersOfvendor(int vendorId) {
 		List<Orders> vendorOrders= dao.findByVendorServiceVendorServiceDetailsId(vendorId);
-		List<OrderDto> dto=vendorOrders.stream().map(order->converter.toVendorOrderDto(order,vendorId)).collect(Collectors.toList());
-		
-		return dto;
-		
+		List<OrderDto> dto = null;
+		if(!vendorOrders.isEmpty()) {
+			dto=vendorOrders.stream().map(order->converter.toVendorOrderDto(order,vendorId)).collect(Collectors.toList());
+		}else {
+			throw new NullPointerException();
+		}
+		return dto;		
 	}
 	
 	public DoubleSummaryStatistics getStats(int vendorId) {

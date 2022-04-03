@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,19 +24,25 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "booking_id")
 	private int bookingId;
+	
 	@Column(name = "brides_name")
 	private String bridesName;
+	
 	@Column(name = "grooms_name")
 	private String groomsName;
+	
 	@Column(name = "guest_count")
 	private long guestCount;
 	
 	@Column(name = "wedding_date")
 	private Date weddingDate;
+	
 	@Column(name = "wedding_city")
 	private String weddingCity;
+	
 	@Column(name = "pay_amount")
 	private double payAmount;
+	
 	@Column(name = "pay_status")
 	private boolean payStatus;
 	
@@ -50,10 +55,6 @@ public class Booking {
 	private User client;
 	
 		
-	@Column(name = "wedding_status", insertable = false)
-	private boolean weddingStatus;
-	
-	
 	@Column(name = "createdtimestamp", insertable = false)
 	@Temporal(TemporalType.TIMESTAMP)
     private Date createdtimestamp ;
@@ -65,8 +66,8 @@ public class Booking {
 
 
 	public Booking(int bookingId, String bridesName, String groomsName, long guestCount, Date weddingDate,
-			String weddingCity, double payAmount, boolean payStatus, List<Orders> orders, User customerBooking,
-			boolean weddingStatus, Date createdtimestamp) {
+			String weddingCity, double payAmount, boolean payStatus, List<Orders> orders, User customerBooking
+			, Date createdtimestamp) {
 		this.bookingId = bookingId;
 		this.bridesName = bridesName;
 		this.groomsName = groomsName;
@@ -77,7 +78,6 @@ public class Booking {
 		this.payStatus = payStatus;
 		this.orders = orders;
 		this.client = customerBooking;
-		this.weddingStatus = weddingStatus;
 		this.createdtimestamp = createdtimestamp;
 	}
 
@@ -181,14 +181,6 @@ public class Booking {
 		this.client = client;
 	}
 
-	public boolean getWeddingStatus() {
-		return weddingStatus;
-	}
-
-	public void setWeddingStatus(boolean weddingStatus) {
-		this.weddingStatus = weddingStatus;
-	}
-
 	public void addOrders(Orders order) {
 		if(this.orders==null) {
 			this.orders=new ArrayList<>();
@@ -202,22 +194,7 @@ public class Booking {
 		}
 		order.setBooking(this);
 	}
-	
-
-
-//	@Override
-//	public String toString() {
-//		return "Booking [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName=" + groomsName
-//				+ ", guestCount=" + guestCount + ", weddingDate=" + weddingDate + ", weddingCity=" + weddingCity
-//				+ ", payAmount=" + payAmount + ", payStatus=" + payStatus + ", orders=" + orders + ", client=" + client
-//				+ ", weddingStatus=" + weddingStatus + ", createdtimestamp=" + createdtimestamp + "]";
-//	}
-//	
-	
-	
-	
-	
-	
+		
 }
 
 

@@ -89,7 +89,7 @@ public class VendorController {
 //	Find Single Feedback By Specific RatingReviews Id	
 	@GetMapping("/feedback/{id}")
 	public ResponseEntity<?> getRatingReviews(@PathVariable("id") int id) {
-		RatingReviews feedback = ratingService.getById(id);
+		ServiceFeedbackDto feedback = ratingService.getById(id);
 		return Response.success(feedback);
 	}
 
@@ -122,8 +122,8 @@ public class VendorController {
 //	find Specific Service Reviews by Service Detail Id(vs_id)
 	@GetMapping("/feedback/service/{id}")
 	public ResponseEntity<?> findSpecificServiceReviews(@PathVariable("id") int id) {
-
-		List<RatingReviews> addedFeedback = ratingService.findFeedbackByServiceId(id);
+		
+		List<ServiceFeedbackDto> addedFeedback = ratingService.findFeedbackByServiceId(id);
 		return Response.success(addedFeedback);
 	}
 
