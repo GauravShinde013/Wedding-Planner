@@ -7,8 +7,7 @@ const selectOption = (theme) => ({
     borderRadius: "25px"
 })
 
-const ServiceDetails = ({ formData, setFormData,services }) => {
-    
+const ServiceDetails = ({ formData, setFormData, services }) => {
 
     const handleState = (e) => {
         setFormData({ ...formData, serviceName: e.target.value })

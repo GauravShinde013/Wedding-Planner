@@ -1,45 +1,35 @@
 import { ApprovalOutlined, Cancel, LocationCity, LocationSearching, MailOutlined, Pending, PhoneAndroid, PushPinOutlined, Verified } from '@mui/icons-material';
-import React from 'react';
+import axios from 'axios';
+import { Button } from 'bootstrap';
+import React, { useEffect, useState } from 'react';
+import ChangePassword from '../ChangePassword/ChangePassowrd';
+import profilePic from "../../../img/blogDefault.png"
 
-const ShowProfile = ({ profile }) => {
-    const Approved = () => {
-        const flag = 1;
-        const status = (flag === 1) ?
-            (
-                <div>
-                    <Verified style={{ color: "green" }} />
-                    {"Authorized Vendor"}
-                </div>
-            )
-            : (flag === 0) ?
-                (
-                    <div>
-                        <Cancel style={{ color: "red" }} />
-                        {"Un Authorized Vendor"}
-                    </div>
-                ) :
-                (
-                    <div>
-                        <Pending style={{ color: "teal" }} />
-                        {"Pending Vendor"}
-                    </div>
-                );
-        return status;
+const ShowProfile = ({profile}) => {
 
+  
+
+    const profileContainer = {
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        border: " 1px solid rgb(45, 129, 198),",
+        flex: "1",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        padding: "20px",
+        minWidth:"400px",
+        width:"90%",
+        minHeight:"500px"
     }
-
- 
 
     return (
 
 
-        <div style={{backgroundColor:"#fff",borderRadius:"12px",border:" 1px solid rgb(45, 129, 198)"}}  className="card-shadow-1 flex-1">
+        <div style={profileContainer} >
             <div className='d-flex align-items-center'>
-                <img width="50" height="50" className="rounded-circle" src="https://i.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U" alt="" />
+                <img style={{objectFit:"cover"}} width="50" height="50" className="rounded-circle" src={profile.profilePicUrl?profile.profilePicUrl:profilePic} alt="" />
                 <div className='d-flex flex-column ms-3 lh-1'>
-                    <span className='fw-bold'> {profile["First Name"]} {profile["Last Name"]}</span>
+                    <span className='fw-bold'>{profile.firstName} {profile.lastName}  </span>
                     <span className='fw-light'>
-                        <Approved />
 
                     </span>
                 </div>
@@ -76,12 +66,16 @@ const ShowProfile = ({ profile }) => {
                 </div>
                 <div className='d-flex align-items-center my-3'>
                     <PushPinOutlined />
-                    <span className='ms-2'>{profile.postal}</span>
+                    <span className='ms-2'>{profile.pincode}</span>
                 </div>
 
                 <div className='d-flex align-items-center my-3'>
                     <LocationSearching />
-                    <span className='ms-2'>{profile.address}</span>
+                    <span className='ms-2'>{profile.addressLine}</span>
+                </div>
+
+                <div style={{ padding: "16px 0" }}>
+                    <ChangePassword/>
                 </div>
 
             </div>

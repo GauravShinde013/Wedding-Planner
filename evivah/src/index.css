@@ -49,3 +49,31 @@ button {
   border: 1px solid var(--secondary);
   background-color: var(--secondary);
 } */
+
+
+.flex-2{
+  flex:2
+}
+.flex-1{
+  flex:1
+}
+.card-shadow{
+  /* box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75); */
+  /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+  padding: 20px;
+}
+.card-shadow-1{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+}
+
+.menu:hover{
+  color: rgb(94, 53, 177)!important;
+  background-color: rgb(237, 231, 246)!important;
+  border-radius: 7px!important;
+}
+.profile:hover{
+  color: #e3f2fd!important;
+  background: #2196f3!important;
+  border-color: #2196f3!important;
+}

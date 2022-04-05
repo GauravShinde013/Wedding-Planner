@@ -113,7 +113,6 @@ const FormMui = ({ formData, setFormData }) => {
                 name="address"
                 rows={2}
                 multiline
-                helperText="Please select your State"
                 onChange={(e) => setFormData({ ...formData, Address: e.target.value })}
                 value={formData.Address}
             />

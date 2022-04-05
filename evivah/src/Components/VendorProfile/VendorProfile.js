@@ -15,7 +15,7 @@ import axios from 'axios';
 import Imageslider from "../Imageslider/Imageslider"
 
 
-const subtitleStyle = { 
+const subtitleStyle = {
   fontSize: "15px",
   color: "#868996",
   lineHeight: 1.7
@@ -33,9 +33,9 @@ const PlannerDetails = () => {
   const location = useLocation()
   const vendorInfo = location.state.vendor.vendor
   const avgRating = location.state.avgRating
-  
-  
-  const navigate=useNavigate();
+
+
+  const navigate = useNavigate();
 
   const feedbackList = vendorInfo.feedbackList;
 
@@ -44,14 +44,14 @@ const PlannerDetails = () => {
       toast.warning("Only 256 Characters are allowed.")
     }
     else {
-      const body={
+      const body = {
         customerId,
         rating,
         review
       }
 
       const url = `http://localhost:8080/feedback/${vendorInfo.serviceId}`
-      axios.post(url,body).then((response) => {
+      axios.post(url, body).then((response) => {
 
         const result = response.data
         console.log(result);
@@ -66,6 +66,12 @@ const PlannerDetails = () => {
     }
   }
 
+
+  const getOption = (masterServiceName) => {
+    return (
+      masterServiceName === "Planner" ? (<><ShoppingCartIcon /> Book</>): (<><ShoppingCartIcon /> Add To Cart</>)
+      )
+  }
 
 
 
@@ -108,8 +114,9 @@ const PlannerDetails = () => {
                 <div className='d-flex justify-content-between p-4 pb-0'>
                   <div className='flex-fill flex-grow-1'>
                     <button style={{ width: "100%", borderRadius: "30px", border: 'none' }}>
-                      <ShoppingCartIcon />
-                      Add To Cart
+                      {/* <ShoppingCartIcon /> */}
+                      {getOption(vendorInfo.masterServiceName)}
+                      {/* Add To Cart */}
                     </button>
                   </div>
                   <div className='flex-fill flex-grow-1'>

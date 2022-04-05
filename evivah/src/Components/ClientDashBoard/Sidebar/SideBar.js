@@ -10,6 +10,7 @@ import { Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 const text = (theme) => ({
+    
     [theme.breakpoints.down("sm")]: {
         display: "none"
     }
@@ -29,8 +30,8 @@ const link = (theme) => ({
 
 const sidebar = (theme) => ({
     height: "calc(100vh - 70px)",
-    backgroundColor: "#0453F0",
-    borderTopRightRadius: "75px",
+    backgroundColor: "#000",
+    // borderTopRightRadius: "75px",
     color: "#fff",
     padding:"1rem",
     [theme.breakpoints.down("sm")]: {
@@ -61,7 +62,7 @@ const SideBar = () => {
             </Typography>
 
             <Box sx={navItem}>
-                <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/" style={{ padding: "0.5rem 1rem" }}>
+                <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/vendor-dashboard" style={{ padding: "0.5rem 1rem" }}>
                     <Speed sx={icon} className="me-3" />
                     <Typography sx={text} variant='h6'>
                         Home
@@ -80,7 +81,7 @@ const SideBar = () => {
                 </Typography>
 
                 <Box sx={navItem}>
-                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/profile" style={{ padding: "0.5rem 1rem" }}>
+                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/vendor-dashboard/profile" style={{ padding: "0.5rem 1rem" }}>
                         <AccountCircleOutlinedIcon className="me-3" />
                         <Typography sx={text} variant='body-1'>
                             Profile
@@ -89,7 +90,7 @@ const SideBar = () => {
                 </Box>
 
                 <Box sx={navItem}>
-                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/products" style={{ padding: "0.5rem 1rem" }}>
+                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/vendor-dashboard/products" style={{ padding: "0.5rem 1rem" }}>
                         <GridViewOutlinedIcon className="me-3" />
                         <Typography sx={text} variant='body-1'>
                             Products
@@ -98,7 +99,7 @@ const SideBar = () => {
                 </Box>
 
                 <Box sx={navItem}>
-                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/orders" style={{ padding: "0.5rem 1rem" }}>
+                    <Link className='d-flex align-items-center menu text-decoration-none text-white' to="/vendor-dashboard/orders" style={{ padding: "0.5rem 1rem" }}>
                         <TableViewOutlinedIcon className="me-3" />
                         <Typography sx={text} variant='body-1'>
                             Orders
@@ -109,7 +110,7 @@ const SideBar = () => {
             </Box>
 
 
-            <Box mt={3} p={1} className="d-flex align-items-center justify-content-center" sx={{ background: "#2860F3" }}>
+            <Box mt={3} p={1} className="d-flex align-items-center justify-content-center" sx={{ background: "#000" }}>
                 <Typography sx={text} mr={1} variant="h6" >
                     Logout
                 </Typography>
@@ -126,54 +127,3 @@ export default SideBar;
 
 
 
-{/* <Nav sx={{ display: "none" }} className="flex-column mb-auto" >
-
-                <Nav.Item style={textColor}>
-                    <Link sx={link} style={{ color: "#fff" }} id="home" to="/" className='nav-link d-flex align-items-center text-decoration-none menu'>
-                        <Speed sx={icon} className="me-3" />
-                        <Typography sx={text} variant='h6'>
-                            Home
-                        </Typography>
-                    </Link>
-                </Nav.Item>
-                <hr className="my-2 border border-top" style={{ borderColor: "rgb(97,97,97)!important" }} />
-
-                <Typography sx={text} className="my-2" style={{ color: "#fff", padding: "6px" }}>Utilities</Typography>
-
-                <Nav.Item style={textColor}>
-                    <Link sx={link}
-                        id="home" style={textColor} to="/profile" className='nav-link d-flex align-items-center menu'>
-                        <AccountCircleOutlinedIcon className="me-3" />
-                        <Typography sx={text} variant='body-1'>
-                            Profile
-                        </Typography>
-                    </Link>
-
-                </Nav.Item>
-
-
-                <Nav.Item style={textColor}>
-
-                    <Link sx={link}
-                        id="product" style={textColor} to="/products" className='nav-link d-flex align-items-center menu text-decoration-none'>
-                        <GridViewOutlinedIcon className="me-3" />
-                        <Typography sx={text} variant='body-1'>
-                            Products
-                        </Typography>
-                    </Link>
-
-                </Nav.Item>
-
-                <Nav.Item style={textColor}>
-                    <Link sx={link}
-                        id="orders" style={textColor} to="/orders" className='nav-link d-flex align-items-center menu text-decoration-none'>
-                        <TableViewOutlinedIcon className="me-3" />
-                        <Typography sx={text} variant='body-1'>
-                            Orders
-                        </Typography>
-
-                    </Link>
-                </Nav.Item>
-
-
-            </Nav> */}

@@ -11,11 +11,14 @@ import MasterServices from '../MasterServices'
 import { toast } from 'react-toastify'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+import { PhotoCamera } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 
 const getSteps = () => {
     return [
         "Contact Information",
         "Service Details",
+        "Upload Images",
         "Confirmation"
     ]
 }
@@ -55,9 +58,12 @@ const formCss = {
 const FormStepper = ({ services }) => {
 
     const location = useLocation()
-   
+    const navigate=useNavigate();
+
 
     const [activeStep, setActiveStep] = useState(0)
+    const [imgFiles, setImgFiles] = useState([])
+    const [previews, setPreviews] = useState([])
 
     const [formData, setFormData] = useState(
         {
@@ -73,6 +79,28 @@ const FormStepper = ({ services }) => {
         }
     )
 
+    const uploadHandler = (e) => {
+        const fileList = Array.from(e.target.files)
+        setImgFiles(fileList)
+
+
+        const mappedFiles = fileList.map((file) => ({
+            ...file,
+            preview: URL.createObjectURL(file),
+        }))
+
+        setPreviews(mappedFiles)
+    }
+
+    const showPreviews = (previewsList) => {
+
+        return (previewsList.map((photo) => {
+            return (
+                <img style={{ width: "250px", height: "250px", objectFit: "cover" }} src={photo.preview} alt="" />
+            )
+        }))
+    }
+
 
 
     const getStepsContent = (step) => {
@@ -86,6 +114,41 @@ const FormStepper = ({ services }) => {
                     <ServiceDetails services={services} formData={formData} setFormData={setFormData} />
                 )
             case 2:
+                return (
+                    <div style={{textAlign:"center"}}>
+                        <h3 style={{paddingBottom:"20px"}} >Upload Photos to Display Your Service</h3>
+                        <div >
+                            <div className='pb-4'>
+                                <label htmlFor="icon-button-file">
+                                    Upload Photo:
+                                    <input
+                                        multiple
+                                        onChange={uploadHandler}
+                                        accept="image/*"
+                                        style={{ display: "none" }}
+                                        id="icon-button-file" type="file"
+                                    />
+                                    <PhotoCamera color="primary" sx={{ marginLeft: "6px", cursor: "pointer" }} />
+                                </label>
+                            </div>
+
+                            <div>
+                                {previews && showPreviews(previews)}
+                            </div>
+
+                            {/* {
+                                imgFile && <img style={imgStyle}
+                                    src={URL.createObjectURL(imgFile)}
+                                    alt={imgFile.name}
+                                />
+                            } */}
+
+
+                        </div>
+                    </div>
+                )
+
+            case 3:
                 return (
                     <Paper className="p-2">
                         <h4>Confirm Your Details</h4>
@@ -236,10 +299,24 @@ const FormStepper = ({ services }) => {
         else if (activeStep === 1 && (formData.price === 0)) {
             toast.warning("Please Enter Your Service Fees.");
         }
-        else if (activeStep === 2) {
+        else if(activeStep===2 && (imgFiles.length===0 || imgFiles.length<5||imgFiles.length>5)){
+            toast.warning("Uploading Only 5 Images is Mandatory")
+        }
+        else if (activeStep === 3) {
+            
+            let formDetails=new FormData();
+
+            imgFiles.forEach((img)=>{
+                formDetails.append("serviceImages",img)
+            })
+
             const service = services.filter((service) => service.serviceName === formData.serviceName)
+
+
             const masterServiceId = service[0].id
             const userId = location.state.userId
+            
+         
 
             const userBody = {
                 state: formData.uniqueState,
@@ -248,33 +325,46 @@ const FormStepper = ({ services }) => {
                 addressLine: formData.Address
             }
 
-            const serviceBody = {
-                masterServiceId: masterServiceId,
-                userId,
-                brandName: formData.brandName,
-                specification: formData.specification,
-                description: formData.serviceDetails,
-                servicePrice: formData.price
-            }
+            
+
+            formDetails.append("jsonBodyData",
+                new Blob(
+                    [JSON.stringify(
+                        {
+                            "masterServiceId": masterServiceId,
+                            "userId":userId,
+                            "brandName": formData.brandName,
+                            "specification": formData.specification,
+                            "description": formData.serviceDetails,
+                            "servicePrice": formData.price
+                        }
+                    )
+                ],
+                {type:'application/json'}
+                )
+            )
+
             const userUrl = `http://localhost:8080/user/${userId}`
+
             const serviceUrl = `http://localhost:8080/servicedetail/add/`
 
-            axios.get(userUrl,userBody).then((response) => {
+            axios.put(userUrl, userBody).then((response) => {
                 const result = response.data
-                if (result['status'] === 'success'){
-                    axios.get(serviceUrl).then((response)=>{
-                        if (result['status'] === 'success'){
+                if (result['status'] === 'success') {
+                    axios.post(serviceUrl,formDetails).then((response) => {
+                        if (result['status'] === 'success') {
                             toast.success("Welcome To Evivah Family...")
+                            navigate("/login")
                         }
                     })
                 }
-                    
+
             })
 
         }
         else {
             setActiveStep(activeStep + 1)
-        } 
+        }
     }
 
 
@@ -289,7 +379,7 @@ const FormStepper = ({ services }) => {
         <Box >
 
             {
-                activeStep === 3 ? (
+                activeStep === 4 ? (
                     <Typography align="center" variant="h3">
                         Thank You
                     </Typography>
@@ -317,7 +407,7 @@ const FormStepper = ({ services }) => {
                         </Stepper>
 
 
-                        <form style={formCss} >
+                        <form style={{padding:"50px 0"}} >
                             {
                                 getStepsContent(activeStep)
                             }
@@ -342,7 +432,7 @@ const FormStepper = ({ services }) => {
                             onClick={handleNext}
                             sx={nextBtn}
                         >
-                            {activeStep === 2 ? "Submit" : "Next"}
+                            {activeStep === 3 ? "Submit" : "Next"}
                         </Button>
 
                     </Container>

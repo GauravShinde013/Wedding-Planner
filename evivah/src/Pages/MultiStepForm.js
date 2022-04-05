@@ -40,7 +40,7 @@ const MultiStepForm = () => {
     return (
         <div>
             <Navbar />
-            <div>
+            <div style={{padding:"30px 0",background:"rgba(236,220,231,0.925)"}}>
                 <Container sx={stepper}>
                     <Paper sx={paper} elevation={5}  >
                         <MultiForm services={masterServices} />

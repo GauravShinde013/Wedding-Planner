@@ -1,17 +1,12 @@
-
-import { Fab, Grid, IconButton, Tooltip } from '@mui/material';
-import React from 'react';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ServicesComparison from '../Components/ClientDashBoard/ServiceComparison/AllServicesComparison';
-import ClientTable from '../Components/ClientDashBoard/ClientTable/ClientTable';
-
-import Home from '../Components/ClientDashBoard/Home/DashboardHome';
-import ProfileInfo from '../Components/ClientDashBoard/ProfileInfo/ProfileInfo';
-import ServiceSales from '../Components/ClientDashBoard/ServiceSales/ServiceSales';
-import SideBar from '../Components/ClientDashBoard/Sidebar/SideBar';
-import VendorNav from '../Components/ClientDashBoard/VendorNav/VendorNav';
-import VendorProduct from './VendorProduct';
 import AddIcon from '@mui/icons-material/Add';
+import { Grid } from '@mui/material';
+import { Fab, Tooltip } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Home from '../Components/ClientDashBoard/Home/DashboardHome';
+import SideBar from '../Components/ClientDashBoard/Sidebar/SideBar';
+import Navbar from '../Components/Navbar/Navbar';
+
 
 
 
@@ -24,35 +19,40 @@ const fab = (theme) => ({
 
 
 const VendorProfile = () => {
+    
+    const [homeData,setHomeData]=useState([])
 
+    const getMasterServices = () => {
+        const userId = sessionStorage.id
+        const url = `http://localhost:8080/orders/vendor/user/${userId}`
+        axios.get(url).then((response) => {
+            let result = response.data
+            setHomeData(result.data)
+        })
+    }
 
+    useEffect(() => {
+        getMasterServices()
+    }, [])
+    console.log("🚀 ~ file: VendorProfileHome.js ~ line 24 ~ VendorProfile ~ homeData", homeData)
+
+   
 
     return (
 
-        <BrowserRouter >
-            <VendorNav />
+        <div>
+            <Navbar/>
             <div
                 className='d-flex'
                 style={{ backgroundColor: "#E2F0FE" }}
             >
-                <Grid container>
+                <Grid container style={{width:"100%"}}>
                     <Grid item md={2} sm={3} xs={2}>
                         <SideBar />
                     </Grid>
                     <Grid item sm={9} md={10} xs={10}>
+                        <Home homeData={homeData} />
 
-
-                        {/* <ProfileInfo/> */}
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/profile" element={<ProfileInfo />} />
-                            {/* <Route path="/profile" element={<ClientTable />} /> */}
-                            <Route path="/products" element={<VendorProduct />} />
-                            {/* <Route path="/products" element={<ServiceSales />} /> */}
-                            <Route path="/orders" element={<ClientTable />} />
-                            {/* <Route path="/orders" element={<ServicesComparison />} /> */}
-
-                        </Routes>
                     </Grid>
                 </Grid>
             </div>
@@ -62,12 +62,11 @@ const VendorProfile = () => {
                     <AddIcon />
                 </Fab>
             </Tooltip>
-        </BrowserRouter>
 
+        </div>
 
     );
 };
 
 export default VendorProfile;
-
 

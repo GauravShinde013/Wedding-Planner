@@ -62,16 +62,9 @@ const Signup = () => {
       toast.error("File Size Exceeded 10Mb.");
     }
      else {
-      const body = {
-        firstName,
-        lastName,
-        email,
-        mobile,
-        password,
-        role
-      }
+     
 
-      formData.append("blogImg", imgFile)
+      formData.append("userImg", imgFile)
 
       formData.append('jsonBodyData',
         new Blob(
@@ -97,11 +90,12 @@ const Signup = () => {
         const result = response.data
         if (result['status'] === 'success') {
           // toast.success('Welcome to Evivah Family , ' + firstName)
+          const userId=result.data.id
           if(role==="Customer"){
-            navigate('/cust-contact-info')
+            navigate('/')
           }
           else{
-            navigate('/vendor-details')
+            navigate('/vendor-details',{state:{userId:userId}})
           }
         } else {
           toast.error(result['error'])

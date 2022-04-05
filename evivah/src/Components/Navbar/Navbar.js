@@ -49,10 +49,10 @@ const Navbar = () => {
         sessionStorage.removeItem('firstName')
         sessionStorage.removeItem('lastName')
         sessionStorage.removeItem('loginStatus')
-    
+
         // navigate to sign in component
         navigate('/login')
-      }
+    }
 
 
     //FIXME: Navbar responsivnes
@@ -88,7 +88,7 @@ const Navbar = () => {
 
 
 
-                    { user&&<li className='nav-item'>
+                    {user && <li className='nav-item'>
                         <Button
                             id="fade-button"
                             aria-controls={open ? 'fade-menu' : undefined}
@@ -109,7 +109,9 @@ const Navbar = () => {
                             onClose={handleClose}
                             TransitionComponent={Fade}
                         >
-                            <MenuItem onClick={handleClose}>Dashboard</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link to="/vendor-dashboard">Dashboard</Link>
+                            </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <Link to="/create-blog">Create Blog</Link>
                             </MenuItem>

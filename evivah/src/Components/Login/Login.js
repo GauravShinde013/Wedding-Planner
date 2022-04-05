@@ -7,9 +7,16 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
+import {useSelector,useDispatch} from "react-redux"
+import {isLogged} from "../../actions/index"
 
 
 const Login = ({ setUser }) => {
+  
+  const userLogged=useSelector(state=>state.isLogged)
+  const dispatch=useDispatch()
+  console.log(userLogged);
+
   const google = () => {
     window.open("http://localhost:5000/auth/google", "_self");
   };
@@ -30,6 +37,7 @@ const Login = ({ setUser }) => {
 
 
   const LoginHandler = () => {
+    
     if (email.length === 0) {
       toast.warning('please enter email')
     } else if (password.length === 0) {
@@ -49,6 +57,7 @@ const Login = ({ setUser }) => {
       axios.post(url, body).then((response) => {
         const result = response.data
         if (result['status'] === 'success') {
+          dispatch(isLogged())
           const { id, firstName, lastName, email,role } = result['data']
           toast.success('Welcome, ' + firstName + " " + lastName)
 
@@ -65,8 +74,8 @@ const Login = ({ setUser }) => {
           }
           else if(role==="Vendor" || role==="Planner"){
           
-            // navigate("/vendor/dashboard")
-            navigate('/')
+            navigate("/vendor-dashboard")
+            // navigate('/')
           }
 
         } else {

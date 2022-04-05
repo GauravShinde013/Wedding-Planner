@@ -17,6 +17,10 @@ import VendorProfile from "./Components/VendorProfile/VendorProfile"
 import PlannerHome from "./Pages/PlannerHome";
 import MultiStepForm from "./Pages/MultiStepForm";
 import VendorProfileHome from "./Pages/VendorProfileHome";
+import Orders from "./Components/ClientDashBoard/ClientTable/ClientTable"
+import VendorDashboardProfile from "./Components/ClientDashBoard/ProfileInfo/ProfileInfo"
+import VendorDashboardProducts from "./Pages/VendorProduct"
+import OrdersHome from "./Components/ClientDashBoard/OrdersHome/OrdersHome"
 
 
 
@@ -44,6 +48,9 @@ function App() {
           <Route path="/planners" element={<PlannerHome />} />
           <Route path="/vendor-details" element={<MultiStepForm />} />
           <Route path="/vendor-dashboard" element={<VendorProfileHome />} />
+          <Route path="/vendor-dashboard/orders" element={<OrdersHome />} />
+          <Route path="/vendor-dashboard/profile" element={<VendorDashboardProfile />} />
+          <Route path="/vendor-dashboard/products" element={<VendorDashboardProducts />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

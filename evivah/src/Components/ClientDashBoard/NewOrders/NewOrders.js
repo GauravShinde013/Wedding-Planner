@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 
@@ -23,7 +24,7 @@ const rows = [
 
 ];
 
-const NewOrders = () => {
+const NewOrders = ({ recent }) => {
       const tableCss = {
             borderSpacing: '12px',
             borderColor: '#545b5e',
@@ -39,7 +40,7 @@ const NewOrders = () => {
                         <Typography pb={1} variant="h6" component="h2" sx={{ color: "#23245D" }}>
                               Recent Orders
                         </Typography>
-                        <Link className="text-decoration-none" to="/orders">
+                        <Link className="text-decoration-none" to="/vendor-dashboard/orders">
                               <Typography className="d-flex align-items-center justify-content-between" sx={{ color: "#23245D" }}>
                                     See All Orders
                                     <ArrowForwardIosIcon sx={{ fontSize: "18px" }} />
@@ -52,23 +53,23 @@ const NewOrders = () => {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                               <TableHead >
                                     <TableRow>
-                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#002884", color: "#fff" }} >Wedding Date</TableCell>
-                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#002884", color: "#fff" }}>Customer Name</TableCell>
-                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#002884", color: "#fff" }}>Service Name</TableCell>
+                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#212121", color: "#fff" }} >Wedding Date</TableCell>
+                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#212121", color: "#fff" }}>Customer Name</TableCell>
+                                          <TableCell sx={{ fontWeight: "bold", backgroundColor: "#212121", color: "#fff" }}>Service Name</TableCell>
 
                                     </TableRow>
                               </TableHead>
                               <TableBody>
-                                    {rows.map((row) => (
+                                    {recent.map((row) => (
                                           <TableRow
-                                                key={row.name}
+                                                key={row.orderId}
                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                           >
                                                 <TableCell component="th" scope="row">
-                                                      {row.name}
+                                                      {moment(row.bookingList.createdTimestamp).format('MMM DD, YYYY')}
                                                 </TableCell>
-                                                <TableCell>{row.calories}</TableCell>
-                                                <TableCell>{row.fat}</TableCell>
+                                                <TableCell>{row.bookingList.customerFirstName} {row.bookingList.customerLastName}</TableCell>
+                                                <TableCell>{row.serviceName}</TableCell>
 
                                           </TableRow>
                                     ))}
