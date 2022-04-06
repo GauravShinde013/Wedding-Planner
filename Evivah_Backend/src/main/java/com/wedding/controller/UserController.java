@@ -35,9 +35,10 @@ public class UserController {
 	
 //	Add New User (SignUp)
 	@PostMapping(value="/user/signup",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<?> saveUser(@RequestPart(value="blogImg",required=false) MultipartFile blogImg,@RequestPart("jsonBodyData") UserDto user){
-		if(!(blogImg==null)) {
-			String url=photoService.upload(blogImg);
+	public ResponseEntity<?> saveUser(@RequestPart(value="userImg",required=false) MultipartFile userImg,@RequestPart("jsonBodyData") UserDto user){
+		if(!(userImg==null)) {
+		
+			String url=photoService.upload(userImg);
 			user.setProfilePicUrl(url);
 		}
 		UserDto insertedUser=userService.saveUser(user);
@@ -73,17 +74,21 @@ public class UserController {
 		System.out.println(dto.toString());
 		
 		String updatedPassMsg=userService.changePassword(dto);
-		
+		if(updatedPassMsg==null) {
+			return Response.error("Password updation Failed");
+		}
 		return Response.success(updatedPassMsg);
 	}
 	
 //Get User By Id	
 	@GetMapping("/user/get/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable("id") int userId ){
+		System.out.println("In User");
 		UserDto user=userService.findUserById(userId);
 		
 		return Response.success(user);
 	}
+
 
 }
 

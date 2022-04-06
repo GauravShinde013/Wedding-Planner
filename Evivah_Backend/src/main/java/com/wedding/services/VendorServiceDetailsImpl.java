@@ -2,6 +2,8 @@ package com.wedding.services;
 
 
 
+import java.util.DoubleSummaryStatistics;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.kms.model.NotFoundException;
 import com.wedding.daos.IVendorServiceDetailsDao;
 import com.wedding.dtos.DtoEntityConverter;
 import com.wedding.dtos.VendorServiceDetailsDto;
@@ -22,6 +25,8 @@ public class VendorServiceDetailsImpl {
 	private IVendorServiceDetailsDao serviceDetailsDao;
 	@Autowired
 	private DtoEntityConverter converter;
+	@Autowired
+	private BookingServiceImpl bookingService;
 
 	public VendorServiceDetailsDto findServiceDetailsById(int id) {
 		VendorServiceDetails serviceDetails = serviceDetailsDao.findByVendorServiceDetailsId(id);
@@ -30,8 +35,14 @@ public class VendorServiceDetailsImpl {
 	}
 
 	public List<VendorServiceDetailsDto> findServiceDetailsByVendorId(int vendorId) {
+		
 		List<VendorServiceDetails> allServices = serviceDetailsDao.findByUserId(vendorId);
-		List<VendorServiceDetailsDto> dto=allServices.stream().map((service)->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
+		List<VendorServiceDetailsDto> dto=null;
+		if(!allServices.isEmpty()) {
+			dto=allServices.stream().map((service)->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
+		}else {
+			throw new NotFoundException("Vendor Not Found. Check vendor Id");
+		}
 		
 		return dto;
 
@@ -39,7 +50,6 @@ public class VendorServiceDetailsImpl {
 
 	public String saveServiceDetails(VendorServiceDetailsDto vsDetails) {
 		VendorServiceDetails details = converter.toVendorServiceDetailsEntity(vsDetails);
-		System.out.println("Service: "+details.toString());
 		serviceDetailsDao.save(details);
 		return "Service Added....";
 	}
@@ -64,6 +74,11 @@ public class VendorServiceDetailsImpl {
 
 	}
 	
+	public List<VendorServiceDetailsDto> getAllVendors(){
+		List<VendorServiceDetails> allServices=serviceDetailsDao.findAll();
+		List<VendorServiceDetailsDto> dto= allServices.stream().map(service->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
+		return dto;
+	}
 	public List<VendorServiceDetailsDto> getAllServices(){
 		List<VendorServiceDetails> allServices=serviceDetailsDao.findAll();
 		List<VendorServiceDetailsDto> dto= allServices.stream().map(service->converter.toVendorServiceDetailsDto(service))
@@ -89,9 +104,31 @@ public class VendorServiceDetailsImpl {
 		
 		return getAllPlanners().stream().count();
 	}
+
+	
+	public HashMap<String, Long> getHomeStats() {
+		
+		HashMap<String, Long> homeStats=new HashMap<>();
+		
+		long vendorCount= getVendorsCount(); 
+		long plannerCount=getPlannersCount(); 
+		DoubleSummaryStatistics bookingStats=bookingService.getAllBookingsStatistics();
+		long bookingCount=bookingStats.getCount();
+		long bookingSales=(long)bookingStats.getSum();
+		
+		homeStats.put("vendorCount", vendorCount);
+		homeStats.put("plannerCount", plannerCount);
+		homeStats.put("bookingCount", bookingCount);
+		homeStats.put("bookingSales", bookingSales);
+		
+		return homeStats;
+		
+		
+	}
 	
 	public List<VendorServiceDetailsDto> lastFiveVendors(){
 		List<VendorServiceDetails> vendors=serviceDetailsDao.findTop5ByOrderByCreatedTimestampDesc();
+		
 		List<VendorServiceDetailsDto> dto= vendors.stream().map(service->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
 		
 		return dto;

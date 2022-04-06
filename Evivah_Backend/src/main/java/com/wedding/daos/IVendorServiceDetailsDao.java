@@ -15,4 +15,7 @@ public interface IVendorServiceDetailsDao extends JpaRepository<VendorServiceDet
 	@Query("update VendorServiceDetails v set v.isApproved=?2 where v.vendorServiceDetailsId=?1")
 	int approvedService(int serviceId,int flag);
 	List<VendorServiceDetails> findTop5ByOrderByCreatedTimestampDesc();
+	
+	List<VendorServiceDetails> findByUserRole(String role);
+//	List<VendorServiceDetails> findByBookingVendorServiceVendorServiceDetailsId();
 }

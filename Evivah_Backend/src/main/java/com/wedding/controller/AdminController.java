@@ -1,5 +1,6 @@
 package com.wedding.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wedding.dtos.CustomizeBookingDto;
 import com.wedding.dtos.Response;
 import com.wedding.dtos.UserDto;
 import com.wedding.dtos.VendorServiceDetailsDto;
+import com.wedding.services.BookingServiceImpl;
 import com.wedding.services.UserServiceImpl;
 import com.wedding.services.VendorServiceDetailsImpl;
 
@@ -27,6 +30,8 @@ public class AdminController {
 	private VendorServiceDetailsImpl vendorService;
 	@Autowired
 	private UserServiceImpl userService;
+	@Autowired
+	private BookingServiceImpl bookingService;
 	
 //	Approval Of vendor Service
 	@PutMapping("/admin/vendor/{id}")
@@ -51,11 +56,25 @@ public class AdminController {
 		return Response.success(allPlanners);
 		
 	}
+	@GetMapping("/admin/allVendors")
+	public ResponseEntity<?> getAllVendors(){
+		List<VendorServiceDetailsDto> allPlanners =vendorService.getAllVendors();
+		return Response.success(allPlanners);
+		
+	}
+	
 	
 	//Show All Customers
 	@GetMapping("/admin/vendor/allCustomers")
 	public ResponseEntity<?> getAllCustomers(){
 		List<UserDto> allCustomers =userService.showAllCustomers();
+		return Response.success(allCustomers);
+		
+	}
+	//Show All Users
+	@GetMapping("/admin/allUsers")
+	public ResponseEntity<?> getAllUsers(){
+		List<UserDto> allCustomers =userService.showAllUsers();
 		return Response.success(allCustomers);
 		
 	}
@@ -77,6 +96,13 @@ public class AdminController {
 		return Response.success(plannersCount);
 		
 	}
+	//get Statistics For Admin Home
+	@GetMapping("admin/home/getStats")
+	public ResponseEntity<?> getStats(){
+		HashMap<String, Long> getStats=vendorService.getHomeStats();
+		return Response.success(getStats);
+		
+	}
 //	Count of Customers
 	@GetMapping("/admin/customers/count")
 	public ResponseEntity<?> getCountOfCustomers(){
@@ -89,6 +115,13 @@ public class AdminController {
 	@GetMapping("/admin/recent/customers")
 	public ResponseEntity<?> getTopCustomers(){
 		List<UserDto> dto =userService.lastFiveCustomers();
+		return Response.success(dto);
+		
+	}
+//	Recently added Customers
+	@GetMapping("/admin/recent/members")
+	public ResponseEntity<?> getTopMembers(){
+		List<UserDto> dto =userService.lastFiveMembers();
 		return Response.success(dto);
 		
 	}
@@ -106,6 +139,12 @@ public class AdminController {
 	@GetMapping("/admin/recent/services")
 	public ResponseEntity<?> getTopServices(){
 		List<VendorServiceDetailsDto> dto =vendorService.lastFiveVendors();
+		return Response.success(dto);
+		
+	}
+	@GetMapping("/admin/recent/bookings")
+	public ResponseEntity<?> getTopBookings(){
+		List<CustomizeBookingDto> dto =bookingService.getRecentBookings();
 		return Response.success(dto);
 		
 	}

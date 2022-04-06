@@ -15,6 +15,7 @@ import com.wedding.dtos.CustomizeBookingDto;
 import com.wedding.dtos.DtoEntityConverter;
 import com.wedding.dtos.MasterServicePhotoDto;
 import com.wedding.dtos.OrderDto;
+import com.wedding.dtos.VendorOrdersDto;
 import com.wedding.dtos.VendorServiceDetailsDto;
 import com.wedding.entities.MasterServices;
 import com.wedding.entities.Orders;
@@ -31,17 +32,31 @@ public class OrdersServiceImpl {
 	public OrderDto getByOrderId(int id) {
 		Orders order= dao.findByOrderId(id);
 		return converter.toOrderDto(order);
+		
 	}
-	
+	public List<VendorOrdersDto> getAllOrdersOfvendorByUserId(int userId) {
+		List<Orders> vendorOrders= dao.findByVendorServiceUserId(userId);
+		 List<VendorOrdersDto> dto=null;
+			if(!vendorOrders.isEmpty()) {
+				dto= vendorOrders.stream().map((order)->converter.toVendorOrderDto(order)).collect(Collectors.toList());
+			}else {
+				throw new NullPointerException();
+			}
+			
+		return dto;
+		
+	}
 	public List<OrderDto> getAllOrdersOfvendor(int vendorId) {
-		List<Orders> vendorOrders= dao.findByVendorServiceVendorServiceDetailsId(vendorId);
-		List<OrderDto> dto = null;
+		List<Orders> vendorOrders= dao.findByVendorServiceUserId(vendorId);
+		List<OrderDto> dto=null;
 		if(!vendorOrders.isEmpty()) {
 			dto=vendorOrders.stream().map(order->converter.toVendorOrderDto(order,vendorId)).collect(Collectors.toList());
 		}else {
 			throw new NullPointerException();
 		}
-		return dto;		
+		
+		return dto;
+		
 	}
 	
 	public DoubleSummaryStatistics getStats(int vendorId) {

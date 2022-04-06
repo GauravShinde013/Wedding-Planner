@@ -269,6 +269,28 @@ public class User {
 	}
 
 
+//
+	public List<VendorServiceDetails> getServiceDetails() {
+		return serviceDetails;
+	}
+
+
+
+	public void setServiceDetails(List<VendorServiceDetails> serviceDetails) {
+		this.serviceDetails = serviceDetails;
+	}
+
+
+//
+//	public List<RatingReviews> getFeedback() {
+//		return feedback;
+//	}
+//
+//
+//
+//	public void setFeedback(List<RatingReviews> feedback) {
+//		this.feedback = feedback;
+//	}
 
 
 

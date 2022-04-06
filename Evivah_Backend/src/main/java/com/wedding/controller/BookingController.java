@@ -16,6 +16,8 @@ import com.wedding.dtos.BookingOrdersDto;
 import com.wedding.dtos.CustomizeBookingDto;
 import com.wedding.dtos.OrderDto;
 import com.wedding.dtos.Response;
+import com.wedding.dtos.VendorOrdersDto;
+import com.wedding.entities.Orders;
 import com.wedding.services.BookingServiceImpl;
 import com.wedding.services.OrdersServiceImpl;
 
@@ -81,7 +83,14 @@ public class BookingController {
 			OrderDto order=orderService.getByOrderId(id);
 			return Response.success(order);
 		}
-//		Get All orders of Vendor by vendor Id		
+		
+//		Get All orders of Vendor by vendor(user) Id		
+		@GetMapping("/orders/vendor/user/{id}")
+		public ResponseEntity<?> getOrdersOfVendorByUserId(@PathVariable("id") int id){
+			List<VendorOrdersDto> book=orderService.getAllOrdersOfvendorByUserId(id);
+			return Response.success(book);
+		}
+			
 		@GetMapping("/orders/vendor/{id}")
 		public ResponseEntity<?> getOrdersOfVendor(@PathVariable("id") int id){
 			List<OrderDto> book=orderService.getAllOrdersOfvendor(id);

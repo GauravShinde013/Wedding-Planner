@@ -17,7 +17,7 @@ public class CustomizeBookingDto {
 	private int customerId;
 	private String customerFirstName;
 	private String customerLastName;
-
+	private Date createdTimestamp;
 
 	List<BookingOrdersDto> orders;
 
@@ -26,13 +26,6 @@ public class CustomizeBookingDto {
 	public CustomizeBookingDto() {
 		this.serviceDetailsList = new ArrayList<>();
 	}
-	
-
-	public CustomizeBookingDto(List<BookingOrdersDto> orders) {
-		super();
-		this.orders = orders;
-	}
-
 
 	public CustomizeBookingDto(int bookingId, String bridesName, String groomsName, long guestCount, double payAmount,
 			boolean payStatus, String weddingCity, Date weddingDate, int customerId, String customerFirstName,
@@ -50,7 +43,6 @@ public class CustomizeBookingDto {
 		this.customerId = customerId;
 		this.customerFirstName = customerFirstName;
 		this.customerLastName = customerLastName;
-		
 		this.orders = orders;
 		this.serviceDetailsList = serviceDetailsList;
 	}
@@ -61,6 +53,17 @@ public class CustomizeBookingDto {
 
 	public void setOrders(List<BookingOrdersDto> orders) {
 		this.orders = orders;
+	}
+
+
+	
+
+	public Date getCreatedTimestamp() {
+		return createdTimestamp;
+	}
+
+	public void setCreatedTimestamp(Date createdTimestamp) {
+		this.createdTimestamp = createdTimestamp;
 	}
 
 	public int getCustomerId() {
@@ -163,8 +166,21 @@ public class CustomizeBookingDto {
 	public String toString() {
 		return "CustomizeBookingDto [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName="
 				+ groomsName + ", guestCount=" + guestCount + ", payAmount=" + payAmount + ", payStatus=" + payStatus
-				+ ", weddingCity=" + weddingCity + ", weddingDate=" + weddingDate + "]";
+				+ ", weddingCity=" + weddingCity + ", weddingDate=" + weddingDate + ", customerId=" + customerId
+				+ ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName + "]";
 	}
+
 	
 	
+
+//	@Override
+//	public String toString() {
+//		return "CustomizeBookingDto [bookingId=" + bookingId + ", bridesName=" + bridesName + ", groomsName="
+//				+ groomsName + ", guestCount=" + guestCount + ", payAmount=" + payAmount + ", payStatus=" + payStatus
+//				+ ", weddingCity=" + weddingCity + ", weddingDate=" + weddingDate + ", customerId=" + customerId
+//				+ ", customerFirstName=" + customerFirstName + ", customerLastName=" + customerLastName
+//				+ ", weddingStatus=" + weddingStatus + ", orders=" + orders + ", serviceDetailsList="
+//				+ serviceDetailsList + "]";
+//	}
+
 }

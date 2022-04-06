@@ -10,5 +10,6 @@ import com.wedding.entities.Orders;
 public interface IOrderDao extends JpaRepository<Orders, Integer> {
 	Orders findByOrderId(int id);
 	List<Orders> findByVendorServiceVendorServiceDetailsId(int id);
+	List<Orders> findByVendorServiceUserId(int id);
 
 }

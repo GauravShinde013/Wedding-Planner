@@ -34,6 +34,8 @@ public class DtoEntityConverter {
 		dto.setState(user.getState());
 		dto.setCreatedTimestamp(user.getCreatedTimestamp());
 		dto.setProfilePicUrl(user.getProfileImage());
+//		 user.getServiceDetails().stream().map((service)->service.getBooking()).collect(Collectors.toList()).stream().map((order)->order);
+		
 		return dto;
 
 	}
@@ -212,13 +214,11 @@ public class DtoEntityConverter {
 		dto.setPassword("******");
 		dto.setProfilePicUrl(user.getProfileImage());
 		dto.setCity(user.getCity());
-		dto.setCreatedTimestamp(user.getCreatedTimestamp());
 		dto.setAddressLine(user.getAddressLine());
-        dto.setState(user.getState());
-        dto.setPincode(user.getPincode());
-        dto.setCreatedTimestamp(user.getCreatedTimestamp());
-        dto.setRole(user.getRole());
-
+		dto.setState(user.getState());
+		dto.setPincode(user.getPincode());
+		dto.setCreatedTimestamp(user.getCreatedTimestamp());
+		dto.setRole(user.getRole());
 		return dto;
 	}
 
@@ -236,6 +236,7 @@ public class DtoEntityConverter {
 		dto.setCustomerId(booking.getClient().getId());
 		dto.setCustomerFirstName(booking.getClient().getFirstName());
 		dto.setCustomerLastName(booking.getClient().getLastName());
+		dto.setCreatedTimestamp(booking.getCreatedtimestamp());
 //		dto.setOrders(booking.getOrders());
 
 		List<VendorServiceDetailsDto> vdto = booking.getOrders().stream()
@@ -302,5 +303,45 @@ public class DtoEntityConverter {
 		return booking;
 
 	}
+	
+	public VendorOrdersDto toVendorOrderDto(Orders order) {
+		VendorOrdersDto dto=new VendorOrdersDto();
+		
+		dto.setOrderId(order.getOrderId());
+		
+		dto.setServiceId(order.getVendorService().getVendorServiceDetailsId());
+		dto.setServiceName(order.getVendorService().getMasterService().getServiceName());
+		dto.setServicePrice(order.getVendorService().getServicePrice());
+		dto.setVendorFirstName(order.getVendorService().getUser().getFirstName());
+		dto.setVendorLastName(order.getVendorService().getUser().getLastName());
+		
+		CustomizeBookingDto cdto=toCustomizeBookingDto(order.getBooking());
+		cdto.setServiceDetailsList(null);
+		dto.setBookingList(cdto);
+		
+		
+		return dto;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
