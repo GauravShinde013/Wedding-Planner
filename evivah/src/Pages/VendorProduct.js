@@ -43,9 +43,7 @@ const VendorProduct = () => {
                                 <ServicesComparison />
                             </div>
                             <hr />
-                            {/* {products.map(product => {
-                return <Service product={product} />
-            })} */}
+                            
                             <Service products={services} />
                         </Container>
                     </Grid>

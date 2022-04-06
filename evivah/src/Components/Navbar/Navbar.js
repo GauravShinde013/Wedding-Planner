@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Logo from '../../img/assets/logo.png'
 import websiteLogo from '../../img/websiteLogo1.png'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import './NavbarStyles.css'
@@ -9,6 +8,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom'
+import { ShoppingCart } from '@mui/icons-material'
+import { Badge } from '@mui/material'
+import { IconButton } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux';
+import { emptyCart } from "../../actions/index";
 
 const dropdownStyle = (theme) => ({
     fontSize: "20px",
@@ -26,8 +30,17 @@ const Navbar = () => {
 
 
     const loginStatus = sessionStorage['loginStatus']
+    const userRole = sessionStorage['role']
     const [user, setUser] = useState(loginStatus)
 
+    const cartData=useSelector(state => state.cart)
+    const [count,setCount]=useState()
+
+    const dispatch=useDispatch()
+
+    useEffect(()=>{
+        setCount(cartData.total)
+    },[cartData])
 
     const [click, setClick] = useState(false)
     const handleClick = () => setClick(!click)
@@ -49,6 +62,10 @@ const Navbar = () => {
         sessionStorage.removeItem('firstName')
         sessionStorage.removeItem('lastName')
         sessionStorage.removeItem('loginStatus')
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('role')
+
+        dispatch(emptyCart())
 
         // navigate to sign in component
         navigate('/login')
@@ -56,7 +73,6 @@ const Navbar = () => {
 
 
     //FIXME: Navbar responsivnes
-    //FIXME:Blog Vendor Buttons Disappeared
 
     return (
         <header>
@@ -66,9 +82,9 @@ const Navbar = () => {
                 </div>
 
                 <ul className={click ? "nav-menu active" : 'nav-menu'}>
-                    <li className='nav-item'>
+                   { userRole!=="Vendor"&&<li className='nav-item'>
                         <Link to='/vendor-options' className='navbar-link'>Vendors</Link>
-                    </li>
+                    </li>}
                     <li className='nav-item'>
                         <Link to='/blogs' className='navbar-link'>Blogs</Link>
                     </li>
@@ -110,14 +126,28 @@ const Navbar = () => {
                             TransitionComponent={Fade}
                         >
                             <MenuItem onClick={handleClose}>
-                                <Link to="/vendor-dashboard">Dashboard</Link>
+                                <Link to={userRole === "Vendor" ? "/vendor-dashboard" : "/customer-dashboard"}>Dashboard</Link>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Link to="/create-blog">Create Blog</Link>
-                            </MenuItem>
+
+                            {
+                                userRole !== "Vendor" && <MenuItem onClick={handleClose}>
+                                    <Link to="/create-blog">Create Blog</Link>
+                                </MenuItem>
+                            }
                             <MenuItem onClick={logoutHandler} >Logout</MenuItem>
                         </Menu>
-                    </li>}
+                    </li>
+                    }
+                    {
+                        user && userRole!=="Vendor"&&
+                        <IconButton component={Link} to='/booking-cart' aria-label='Show cart items' color='inherit'>
+                            <div style={{ cursor: "pointer" }}>
+                                <Badge badgeContent={count} color="info">
+                                    <ShoppingCart />
+                                </Badge>
+                            </div>
+                        </IconButton>
+                    }
                 </ul>
 
 

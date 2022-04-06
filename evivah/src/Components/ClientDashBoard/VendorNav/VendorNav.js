@@ -83,6 +83,5 @@ const VendorNav = () => {
     );
 };
 
-// background-image: linear-gradient(#46A5FF,#4676FF);
 
 export default VendorNav;

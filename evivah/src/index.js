@@ -13,9 +13,8 @@ import { persistor } from "./store/Store"
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={myStore} >
-      <PersistGate persistor={persistor}>
+   
         <App />
-      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

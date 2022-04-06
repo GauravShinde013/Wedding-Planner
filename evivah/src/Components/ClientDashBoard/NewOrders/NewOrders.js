@@ -11,18 +11,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 
-function createData(name, calories, fat, carbs, protein) {
-      return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-      createData('20-02-2022', "Pratik", "Photography"),
-      createData('22-03-2022', "Dexter", "Photography"),
-      createData('02-02-2022', "Debra", "Photography"),
-      createData('21-05-2022', "Harry", "Photography"),
-      createData('21-02-2022', "Rita", "Photography"),
-
-];
 
 const NewOrders = ({ recent }) => {
       const tableCss = {

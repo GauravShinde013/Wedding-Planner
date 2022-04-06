@@ -13,6 +13,8 @@ import RatingReview from '../RatingReview/RatingReview';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Imageslider from "../Imageslider/Imageslider"
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart } from "../../actions/index";
 
 
 const subtitleStyle = {
@@ -23,10 +25,17 @@ const subtitleStyle = {
 
 const PlannerDetails = () => {
 
+
+
+
+  const dispatch = useDispatch()
+
   const [rating, setRating] = useState()
   const [review, setReview] = useState("")
+  const [buttonFlag, setButtonFlag] = useState(true)
 
   const user = sessionStorage["loginStatus"]
+  const userRole = sessionStorage["role"]
   const customerId = sessionStorage["id"]
 
 
@@ -66,11 +75,48 @@ const PlannerDetails = () => {
     }
   }
 
+  const toIndianCurrency = (num) => {
+    const curr = num.toLocaleString('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+    });
+    return curr;
+};
 
   const getOption = (masterServiceName) => {
     return (
-      masterServiceName === "Planner" ? (<><ShoppingCartIcon /> Book</>): (<><ShoppingCartIcon /> Add To Cart</>)
+      masterServiceName === "Planner" ? (<><ShoppingCartIcon /> Book</>) : (<><ShoppingCartIcon /> Add To Cart</>)
+    )
+  }
+  const bookingHandler = (vendorInfo) => {
+    if (vendorInfo.masterServiceName === "Planner") {
+      const productCartInfo = (
+        {
+          vendorServiceId: vendorInfo.serviceId,
+          cartImage: vendorInfo.imgList[0],
+          masterServiceName: vendorInfo.masterServiceName,
+          serviceName: vendorInfo.brandName,
+          price: vendorInfo.servicePrice,
+        }
       )
+      dispatch(addToCart(productCartInfo))
+      navigate("/checkout");
+    }
+    else {
+      const productCartInfo = (
+        {
+          vendorServiceId: vendorInfo.serviceId,
+          cartImage: vendorInfo.imgList[0],
+          masterServiceName: vendorInfo.masterServiceName,
+          serviceName: vendorInfo.brandName,
+          price: vendorInfo.servicePrice,
+        }
+      )
+      dispatch(addToCart(productCartInfo))
+      setButtonFlag(false)
+      toast.success("Vendor Added to Cart")
+      // Add to cart
+    }
   }
 
 
@@ -106,18 +152,18 @@ const PlannerDetails = () => {
                 <hr style={{ margin: "0" }} />
 
                 <div className='d-flex flex-column p-4 pb-0'>
-                  <h3 style={{ color: "darkslateblue" }} >&#8377; {vendorInfo.servicePrice} </h3>
+                  <h3 style={{ color: "darkslateblue" }} >{toIndianCurrency(vendorInfo.servicePrice)} </h3>
                   <h5 style={subtitleStyle} >{vendorInfo.specification}</h5>
                 </div>
                 <hr style={{ margin: "0" }} />
 
                 <div className='d-flex justify-content-between p-4 pb-0'>
                   <div className='flex-fill flex-grow-1'>
-                    <button style={{ width: "100%", borderRadius: "30px", border: 'none' }}>
-                      {/* <ShoppingCartIcon /> */}
-                      {getOption(vendorInfo.masterServiceName)}
-                      {/* Add To Cart */}
-                    </button>
+                    {
+                     userRole!=="Vendor"&& buttonFlag && <button onClick={(e) => bookingHandler(vendorInfo)} style={{ width: "100%", borderRadius: "30px", border: 'none' }}>
+                        {getOption(vendorInfo.masterServiceName)}
+                      </button>
+                    }
                   </div>
                   <div className='flex-fill flex-grow-1'>
                     <button style={{ width: "100%", marginLeft: "12px", borderRadius: "30px", backgroundColor: "#fa4a6f", border: 'none' }}>

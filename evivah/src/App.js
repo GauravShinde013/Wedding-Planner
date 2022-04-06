@@ -21,6 +21,17 @@ import Orders from "./Components/ClientDashBoard/ClientTable/ClientTable"
 import VendorDashboardProfile from "./Components/ClientDashBoard/ProfileInfo/ProfileInfo"
 import VendorDashboardProducts from "./Pages/VendorProduct"
 import OrdersHome from "./Components/ClientDashBoard/OrdersHome/OrdersHome"
+import CustomerDashboardHome from "./Pages/CustomerDashboardHome";
+import CustomerOrders from "./Components/CustomerDashboard/CustomerOrders/CustomerOrders"
+import Cart from "./Components/Cart/Cart"
+import Checkout from "./Components/Checkout/Checkout"
+import AdminHome from "./Pages/AdminDashBoardPages/Home/Home"
+import UserList from "./Pages/AdminDashBoardPages/userList/UserList"
+import VendorsList from "./Pages/AdminDashBoardPages/ProductList/ProductList"
+import User from "./Pages/AdminDashBoardPages/user/User"
+import Vendor from "./Pages/AdminDashBoardPages/Product/Product"
+import NewUser from "./Pages/AdminDashBoardPages/NewUser/NewUser"
+import NewVendor from "./Pages/AdminDashBoardPages/NewProduct/NewProduct"
 
 
 
@@ -47,10 +58,26 @@ function App() {
           <Route path="/vendor-info" element={<VendorProfile />} />
           <Route path="/planners" element={<PlannerHome />} />
           <Route path="/vendor-details" element={<MultiStepForm />} />
+
           <Route path="/vendor-dashboard" element={<VendorProfileHome />} />
           <Route path="/vendor-dashboard/orders" element={<OrdersHome />} />
           <Route path="/vendor-dashboard/profile" element={<VendorDashboardProfile />} />
           <Route path="/vendor-dashboard/products" element={<VendorDashboardProducts />} />
+
+          <Route path="/customer-dashboard" element={<CustomerDashboardHome />} />
+          <Route path="/customer-dashboard/booking" element={<CustomerOrders />} />
+
+          <Route path="/booking-cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+          <Route path="/admin-dashboard" element={<AdminHome />} />
+          <Route path="/admin-dashboard/users-list" element={<UserList />} />
+          <Route path="/admin-dashboard/user" element={<User />} />
+          <Route path="/admin-dashboard/add-user" element={<NewUser />} />
+          <Route path="/admin-dashboard/vendors-list" element={<VendorsList />} />
+          <Route path="/admin-dashboard/vendor" element={<Vendor />} />
+          <Route path="/admin-dashboard/add-vendor" element={<NewVendor />} />
+
         </Routes>
       </BrowserRouter>
       <ToastContainer theme="colored" />

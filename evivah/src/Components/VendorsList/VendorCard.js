@@ -32,6 +32,14 @@ export default function VendorCard({ vendor }) {
   vendor.vendorCity=titleCase(vendor.vendorCity)
   vendor.specification=titleCase(vendor.specification)
 
+  const toIndianCurrency = (num) => {
+    const curr = num.toLocaleString('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+    });
+    return curr;
+};
+
 
   const navigate=useNavigate()
 
@@ -60,7 +68,7 @@ export default function VendorCard({ vendor }) {
               <div
                 style={{ fontSize: "18px", fontWeight: "500" }}
               >
-                &#8377; {vendor.servicePrice}
+                &#8377; {toIndianCurrency(vendor.servicePrice)}
               </div>
               <div style={{ fontSize: "18px", fontWeight: "500" }}>
                 {vendor.vendorCity}

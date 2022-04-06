@@ -77,3 +77,11 @@ button {
   background: #2196f3!important;
   border-color: #2196f3!important;
 }
+.admin-container{
+  display: flex;
+  margin-top: 10px;
+}
+.admin-link{
+  text-decoration: none;
+  color: inherit;
+}

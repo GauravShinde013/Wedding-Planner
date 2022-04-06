@@ -11,7 +11,7 @@ import {useSelector,useDispatch} from "react-redux"
 import {isLogged} from "../../actions/index"
 
 
-const Login = ({ setUser }) => {
+const Login = () => {
   
   const userLogged=useSelector(state=>state.isLogged)
   const dispatch=useDispatch()
@@ -27,7 +27,7 @@ const Login = ({ setUser }) => {
 
   const facebook = () => {
     window.open("http://localhost:5000/auth/facebook", "_self");
-  };
+  }; 
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -67,7 +67,7 @@ const Login = ({ setUser }) => {
           sessionStorage['lastName'] = lastName
           sessionStorage['email'] = email
           sessionStorage['loginStatus'] = 1
-          setUser(1);
+          sessionStorage['role'] = role
 
           if(role==="Customer"){
             navigate('/')
@@ -75,7 +75,9 @@ const Login = ({ setUser }) => {
           else if(role==="Vendor" || role==="Planner"){
           
             navigate("/vendor-dashboard")
-            // navigate('/')
+          }
+          else if(role==="Admin"){
+            navigate("/admin-dashboard")
           }
 
         } else {

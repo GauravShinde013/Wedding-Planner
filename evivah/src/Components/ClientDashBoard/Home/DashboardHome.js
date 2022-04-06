@@ -2,7 +2,7 @@ import { AttachMoney, ProductionQuantityLimitsOutlined } from '@mui/icons-materi
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import { Box, Paper, Typography } from '@mui/material';
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import NewOrders from '../NewOrders/NewOrders';
 import OrdersShortDetails from '../OrdersShortDetails/OrdersShortDetails';

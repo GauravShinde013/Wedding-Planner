@@ -2,18 +2,20 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Pagination, Paper, Rating, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Service = ({ products }) => {
+    console.log("🚀 ~ file: Service.js ~ line 9 ~ Service ~ products", products.length)
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const [page, setPage] = useState(1);
     const itemPerPage = 3;
-    const [noOfPages] = useState(
-        Math.ceil(products.length / itemPerPage)
+    const [noOfPages,setNoOFPages] = useState(
+        (products.length / itemPerPage).toFixed(0)
     )
+    
 
     const handleChange = (event, value) => {
         setPage(value)
@@ -24,9 +26,9 @@ const Service = ({ products }) => {
         return rating;
     }
 
-    const toVendorInfo=(vendor)=>{
-        const avgRating=getAvgRating(vendor)
-        navigate("/vendor-info",{state:{vendor:{vendor},avgRating:avgRating}})
+    const toVendorInfo = (vendor) => {
+        const avgRating = getAvgRating(vendor)
+        navigate("/vendor-info", { state: { vendor: { vendor }, avgRating: avgRating } })
     }
 
 
@@ -51,31 +53,29 @@ const Service = ({ products }) => {
                                                 style={{ objectFit: "cover" }}
                                             />
                                             <div className="pt-3 " >
-                                                <Container >
-                                                    <Link className="text-decoration-none" to="/products">
-                                                        <h4 className="pt-2">{product.brandName}</h4>
-                                                    </Link>
-                                                    <div className='pt-1'>
-                                                        <div className="d-flex flex-nowrap align-items-center   justify-content-between pt-1 ">
-                                                            <span style={{ color: "red" }}>
-                                                                <h5 className="fs-6">₹ {product.servicePrice}</h5>
-                                                            </span>
-                                                            <Box
+                                                <Link className="text-decoration-none" to="/products">
+                                                    <h4 style={{ paddingLeft: "5px" }} className="pt-2">{product.brandName}</h4>
+                                                </Link>
+                                                <div className='pt-1'>
+                                                    <div className="d-flex flex-nowrap align-items-center   justify-content-between pt-1 ">
+                                                        <span style={{ color: "red" }}>
+                                                            <h5 className="fs-6">₹ {product.servicePrice}</h5>
+                                                        </span>
+                                                        <Box
 
-                                                                sx={{
-                                                                    '& > legend': { mt: 2 },
-                                                                }}
-                                                            >
-                                                                {
+                                                            sx={{
+                                                                '& > legend': { mt: 2 },
+                                                            }}
+                                                        >
+                                                            {
 
 
-                                                                    <Rating name="half-rating-read" defaultValue={() => getAvgRating(product)} precision={0.5} readOnly />
-                                                                }
+                                                                <Rating name="half-rating-read" defaultValue={() => getAvgRating(product)} precision={0.5} readOnly />
+                                                            }
 
-                                                            </Box>
-                                                        </div>
+                                                        </Box>
                                                     </div>
-                                                </Container>
+                                                </div>
                                                 <Accordion
                                                     sx={{
                                                         border: "none",
@@ -105,12 +105,12 @@ const Service = ({ products }) => {
                                                             <Typography
                                                                 variant="subtitle1"
                                                                 component="h4"
-                                                                onClick={()=>toVendorInfo(product)}
-                                                                style={{cursor:"pointer"}}
+                                                                onClick={() => toVendorInfo(product)}
+                                                                style={{ cursor: "pointer" }}
                                                             >
-                                                               
-                                                                    See Details
-                                                                
+
+                                                                See Details
+
                                                             </Typography>
                                                         </Paper>
                                                     </AccordionDetails>
@@ -129,14 +129,12 @@ const Service = ({ products }) => {
                 color="primary"
                 defaultPage={page}
                 onChange={handleChange}
-                // showFirstButton
-                // showLastButton
+                showFirstButton
+                showLastButton
                 hideNextButton
                 hidePrevButton
                 className="text-center"
             />
-
-
             <br />
         </Container>
     );
