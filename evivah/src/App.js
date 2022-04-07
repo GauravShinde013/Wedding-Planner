@@ -32,6 +32,10 @@ import User from "./Pages/AdminDashBoardPages/user/User"
 import Vendor from "./Pages/AdminDashBoardPages/Product/Product"
 import NewUser from "./Pages/AdminDashBoardPages/NewUser/NewUser"
 import NewVendor from "./Pages/AdminDashBoardPages/NewProduct/NewProduct"
+import BookingsList from "./Pages/AdminDashBoardPages/Bookings/BookingsList"
+import CategoriesList from "./Pages/AdminDashBoardPages/Categories/Categories"
+import CustomerDetails from "./Components/CustomerAddressDetails/CustomerAddressHome"
+import AboutUs from "./Components/AboutUs/About"
 
 
 
@@ -58,6 +62,8 @@ function App() {
           <Route path="/vendor-info" element={<VendorProfile />} />
           <Route path="/planners" element={<PlannerHome />} />
           <Route path="/vendor-details" element={<MultiStepForm />} />
+          <Route path="/customer-details" element={<CustomerDetails />} />
+          <Route path="/about" element={<AboutUs />} />
 
           <Route path="/vendor-dashboard" element={<VendorProfileHome />} />
           <Route path="/vendor-dashboard/orders" element={<OrdersHome />} />
@@ -77,6 +83,10 @@ function App() {
           <Route path="/admin-dashboard/vendors-list" element={<VendorsList />} />
           <Route path="/admin-dashboard/vendor" element={<Vendor />} />
           <Route path="/admin-dashboard/add-vendor" element={<NewVendor />} />
+          <Route path="/admin-dashboard/booking-list" element={<BookingsList />} />
+          <Route path="/admin-dashboard/categories-list" element={<CategoriesList />} />
+
+
 
         </Routes>
       </BrowserRouter>

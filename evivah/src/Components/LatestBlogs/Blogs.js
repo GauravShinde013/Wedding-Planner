@@ -6,27 +6,7 @@ import './blogs.css';
 import Card from './BlogCard';
 
 
-function Blogs() {
-  const blogData=[
-    {
-      src:i,
-      text:'Explore',
-      label:'Adventure',
-      path:'/services',
-    },
-    {
-      src:i9,
-      text:'Travel',
-      label:'Luxury',
-      path:'/services',
-    },
-    {
-      src:i8,
-      text:'Set',
-      label:'Mystery',
-      path:'/services',
-    }
-  ]
+function Blogs({blogData}) {
 
   
 

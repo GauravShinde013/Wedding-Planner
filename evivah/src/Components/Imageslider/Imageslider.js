@@ -1,15 +1,14 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
 
-const imgStyle = {
-  height: "358px",
-  objectFit: "cover"
-}
 
-const Imageslider = ({ images }) => {
+const Imageslider = ({ images,size }) => {
+  const imgStyle = {
+    height: size,
+    objectFit: "cover"
+  }
   return (
     <div>
-
       <Carousel>
         <Carousel.Item>
           <img

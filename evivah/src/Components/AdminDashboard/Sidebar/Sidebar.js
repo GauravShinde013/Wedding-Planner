@@ -16,12 +16,7 @@ const Sidebar = () => {
                                 <LineStyle className="admin-sidebar-icons" /> Home
                             </li>
                         </Link>
-                        <li className="admin-sidebar-list-item">
-                            <Timeline className="admin-sidebar-icons" /> Analytics
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <TrendingUp className="admin-sidebar-icons" /> Sales
-                        </li>
+
                     </ul>
                 </div>
 
@@ -37,51 +32,24 @@ const Sidebar = () => {
                         </Link>
                         <Link className="admin-link" to="/admin-dashboard/vendors-list">
                             <li className="admin-sidebar-list-item">
-                                <Storefront /> Products
+                                <Storefront /> Vendors
                             </li>
                         </Link>
-                        <li className="admin-sidebar-list-item">
-                            <AttachMoney /> Transactions
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <BarChart /> Reports
-                        </li>
+                        <Link className="admin-link" to="/admin-dashboard/categories-list">
+                            <li className="admin-sidebar-list-item">
+                                <WorkOutline /> Categories
+                            </li>
+                        </Link>
+                        
+                        <Link className="admin-link" to="/admin-dashboard/booking-list">
+                            <li className="admin-sidebar-list-item">
+                            <AttachMoney /> Bookings
+                            </li>
+                        </Link>
                     </ul>
                 </div>
 
-                <div className="admin-sidebar-menu">
-                    <h3 className="admin-sidebar-title">
-                        Notifications
-                    </h3>
-                    <ul className="admin-sidebar-list">
-                        <li className="admin-sidebar-list-item">
-                            <MailOutline /> Mail
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <DynamicFeed /> Feedback
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <ChatBubbleOutline /> Messages
-                        </li>
-                    </ul>
-                </div>
 
-                <div className="admin-sidebar-menu">
-                    <h3 className="admin-sidebar-title">
-                        Staff
-                    </h3>
-                    <ul className="admin-sidebar-list">
-                        <li className="admin-sidebar-list-item">
-                            <WorkOutline /> Manage
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <Timeline /> Analytics
-                        </li>
-                        <li className="admin-sidebar-list-item">
-                            <Report /> Reports
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     )

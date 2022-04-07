@@ -12,16 +12,16 @@ const Footer = () => {
                 <div className='col solutions'>
                     <h6>Home</h6>
                     <ul>
-                        <li><Link to='/' className='link'>About EVivah</Link></li>
-                        <li><Link to='/'className='link'>Vendors</Link></li>
-                        <li><Link to='/'className='link'>Blogs</Link></li>
+                        <li><Link to='/about' className='link'>About EVivah</Link></li>
+                        <li><Link to='/master-services'className='link'>Vendors</Link></li>
+                        <li><Link to='/blogs'className='link'>Blogs</Link></li>
                         <li><Link to='/'className='link'>Privacy Policy</Link></li>
                     </ul>
                 </div>
                 <div className='col legal'>
                     <h6>Start Planning with Top Rated Vendors</h6>
                     <ul className='top-vendors'>
-                        <li><Link to='/'className='link'>Planners</Link></li>
+                        <li><Link to='/planners'className='link'>Planners</Link></li>
                         <li><Link to='/'className='link'>Photographers</Link></li>
                         <li><Link to='/'className='link'>Makeup Artist</Link></li>
                         <li><Link to='/'className='link'>Trasporatation</Link></li>
@@ -34,15 +34,7 @@ const Footer = () => {
                         <li><Link to='/'className='link'>Apparel</Link></li>
                     </ul>
                 </div>
-                <div className='col legal'>
-                    <h6>Wedding</h6>
-                    <ul>
-                        <li><Link to='/'className='link'>Wedding Blogs</Link></li>
-                        <li><Link to='/'className='link'>Add Blog</Link></li>
-                        <li><Link to='/'className='link'>Wedding Gallery</Link></li>
-
-                    </ul>
-                </div>
+                
                 <div className='col-subscribe'>
                     <h6>Subscribe to our newsletter</h6>
                     <p>The latest news, articles, and resources sent to your inbox weekly.</p>

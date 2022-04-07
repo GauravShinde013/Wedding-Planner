@@ -30,10 +30,13 @@ const UserList = () => {
         setLoading(true)
     }, [fetchAllUsers])
 
+    const showUser=(params)=>{
+    console.log("🚀 ~ file: UserList.js ~ line 34 ~ showUser ~ params", params.row)
 
+    }
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'id', headerName: 'ID', width: 70, },
         {
             field: 'User', headerName: 'User',
             width: 230,
@@ -46,7 +49,7 @@ const UserList = () => {
                 )
             }
         },
-        { field: 'email', headerName: 'Email', width: 150 },
+        { field: 'email', headerName: 'Email', width: 150,},
         { field: 'phone', headerName: 'Mobile Number', width: 150 },
         {
             field: 'role',
@@ -61,12 +64,9 @@ const UserList = () => {
             renderCell: (params) => {
                 return (
                     <div className="userlist-user">
-                        <Link to={"/user/" + params.id} >
-                            <button  className="userlist-edit">
+                            <button onClick={showUser} className="userlist-edit">
                                 Show
                             </button>
-                        </Link>
-                        
                     </div>
                 )
             }

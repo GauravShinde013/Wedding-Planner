@@ -130,7 +130,7 @@ const PlannerDetails = () => {
           <Container>
             <div className="d-flex flex-row justify-content-between mb-5 mt-4">
               <div style={{ flex: "2", width: "200px" }}>
-                <Imageslider images={vendorInfo.imgList} />
+                <Imageslider images={vendorInfo.imgList} size="358px" />
                 {/* <img style={{ width: "100%" }} src={vendorInfo.imgList[0]} alt="" /> */}
               </div>
               <Paper style={{ borderRadius: "7px", width: "100%", marginLeft: "40px", flex: "2", padding: "10px 0" }}>

@@ -8,7 +8,7 @@ export default function Sidebar() {
             <span className="sidebarTitle">ABOUT US</span>
             <span >
                 <img   className="sidebarImage"
-                src="https://www.specialevents.com/sites/specialevents.com/files/Indian_Wedding_Hands_2019_0.jpg"/>
+                src="https://www.specialevents.com/sites/specialevents.com/files/Indian_Wedding_Hands_2019_0.jpg" alt=""/>
             </span> 
             <p>
             This page provides the most authentic information of customer experience through our services in their own words.

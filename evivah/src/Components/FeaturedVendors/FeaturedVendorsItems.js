@@ -8,40 +8,9 @@ import CardItem1 from './FeaturedVendorsCard';
 import './style.css';
 
 
-function Cards1() {
+function Cards1({data}) {
 
-  const data=[
-    {
-      src:i6,
-      text:'Explore',
-      label:'Adventure',
-      path:'/services'
-    },
-    {
-      src:i9,
-      text:'Travel',
-      label:'Luxury',
-      path:'/services'
-    },
-    {
-      src:i8,
-      text:'Set',
-      label:'Mystery',
-      path:'/services'
-    },
-    {
-      src:i7,
-      text:'Experience',
-      label:'Adventure',
-      path:'/products'
-    },
-    {
-      src:i6,
-      text:'Ride',
-      label:'Adrenaline',
-      path:'/sign-up'
-    }
-  ]
+
 
   return (
     <div className='vendorcards'>
@@ -53,7 +22,7 @@ function Cards1() {
             {
               data.map((card,index)=>{
                 return (
-                  <CardItem1 key={index} data={card} ></CardItem1>
+                  <CardItem1 key={index} vendor={card} ></CardItem1>
                 )
               })
             }

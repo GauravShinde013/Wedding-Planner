@@ -56,6 +56,7 @@ const Login = () => {
 
       axios.post(url, body).then((response) => {
         const result = response.data
+        console.log("🚀 ~ file: Login.js ~ line 59 ~ axios.post ~ result", result)
         if (result['status'] === 'success') {
           dispatch(isLogged())
           const { id, firstName, lastName, email,role } = result['data']

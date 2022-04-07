@@ -89,10 +89,10 @@ const Signup = () => {
 
         const result = response.data
         if (result['status'] === 'success') {
-          // toast.success('Welcome to Evivah Family , ' + firstName)
+         
           const userId=result.data.id
           if(role==="Customer"){
-            navigate('/')
+            navigate('/customer-details',{state:{userId:userId}})
           }
           else{
             navigate('/vendor-details',{state:{userId:userId}})

@@ -1,26 +1,24 @@
 
-import { DeleteOutline } from '@mui/icons-material';
 import { DataGrid } from "@mui/x-data-grid";
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { productRows } from "../../../dummyData";
 import "./ProductList.css";
 import Topbar from "../../../Components/AdminDashboard/topbar/Topbar";
 import Sidebar from "../../../Components/AdminDashboard/Sidebar/Sidebar";
 import axios from 'axios';
 import { Spinner } from 'react-bootstrap';
-
+import {useNavigate} from "react-router-dom"
 
 const ProductList = () => {
 
     const [rows, setRows] = useState([])
     const [loading, setLoading] = useState(false)
 
+    const navigate = useNavigate()
+
     const fetchAllVendors = useCallback(async () => {
         const url = `http://localhost:8080/admin/allVendors`
         axios.get(url).then((response) => {
             let result = response.data
-            console.log("🚀 ~ file: ProductList.js ~ line 23 ~ axios.get ~ result", result)
             setRows(result.data)
         })
 
@@ -53,36 +51,41 @@ const ProductList = () => {
         else if (params.row.status === 1) {
             return (
                 <button
-                style={{
-                    border: "none",
-                    borderRadius: "10px",
-                    padding: "5px 10px",
-                    backgroundColor: "green",
-                    color: "white"
-                }}
-            >
-                 Approved
-            </button>
+                    style={{
+                        border: "none",
+                        borderRadius: "10px",
+                        padding: "5px 10px",
+                        backgroundColor: "green",
+                        color: "white"
+                    }}
+                >
+                    Approved
+                </button>
             )
         }
         else {
             return (
                 <button
-                style={{
-                    border: "none",
-                    borderRadius: "10px",
-                    padding: "5px 10px",
-                    backgroundColor: "pink",
-                    color: "white"
-                }}
-            >
-                Pending
-            </button>
+                    style={{
+                        border: "none",
+                        borderRadius: "10px",
+                        padding: "5px 10px",
+                        backgroundColor: "pink",
+                        color: "white"
+                    }}
+                >
+                    Pending
+                </button>
             )
         }
     }
 
-    const productHandler=()
+    const productHandler = (serviceId) => {
+
+        const service = rows.filter((row) => row.serviceId === serviceId);
+        navigate("/admin-dashboard/vendor", { state: { service: service[0] } });
+
+    }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -121,11 +124,9 @@ const ProductList = () => {
             renderCell: (params) => {
                 return (
                     <div className="productlist-action">
-                        <Link to={"/product/" + params.row.id} >
-                            <button onClick={productHandler} className="productlist-edit">
-                                Show
-                            </button>
-                        </Link>
+                        <button onClick={() => productHandler(params.row.serviceId)} className="productlist-edit">
+                            Show
+                        </button>
                     </div>
                 )
             }
@@ -139,7 +140,8 @@ const ProductList = () => {
         name: row.brandName,
         status: row.isApproved,
         Price: row.servicePrice,
-        category: row.masterServiceName
+        category: row.masterServiceName,
+        serviceId: row.serviceId
     }))
 
 

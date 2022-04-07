@@ -1,21 +1,23 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Pagination, Paper, Rating, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 
 
 const Service = ({ products }) => {
-    console.log("🚀 ~ file: Service.js ~ line 9 ~ Service ~ products", products.length)
+    console.log("🚀 ~ file: Service.js ~ line 9 ~ Service ~ products", products)
+    const [page, setPage] = useState(1);
+    const [noOfPages, setNoOFPages] = useState(0)
+    const itemPerPage = 3;
 
     const navigate = useNavigate()
 
-    const [page, setPage] = useState(1);
-    const itemPerPage = 3;
-    const [noOfPages,setNoOFPages] = useState(
-        (products.length / itemPerPage).toFixed(0)
-    )
-    
+
+
+    useEffect(() => {
+        setNoOFPages(Math.ceil((products.length / itemPerPage)))
+    }, [products.length])
 
     const handleChange = (event, value) => {
         setPage(value)

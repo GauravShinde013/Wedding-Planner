@@ -3,11 +3,64 @@ import { Link } from "react-router-dom"
 import Chart from "../../../Components/AdminDashboard/Chart/Chart"
 import "./Product.css"
 import { productData } from "../../../dummyData";
-import { Publish } from "@mui/icons-material";
+import { Cancel, Pending, Publish, Verified } from "@mui/icons-material";
 import Topbar from "../../../Components/AdminDashboard/topbar/Topbar";
 import Sidebar from "../../../Components/AdminDashboard/Sidebar/Sidebar";
+import { useLocation } from "react-router-dom"
+import Imageslider from "../../../Components/Imageslider/Imageslider";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
 const Product = () => {
+    const images = ["https://owpphotos.s3.ap-south-1.amazonaws.com/24c5100f-29a4-44ff-88c2-4aeb6ab86d3f.jpg"]
+    const location = useLocation()
+    const service = location.state.service
+    const [flag,setFlag]=useState(service.isApproved);
+    const [loading,setLoading]=useState(false)
+
+    const Approved = () => {
+        const status = (flag === 1) ?
+            (
+                <div>
+                    <Verified style={{ color: "green" }} />
+                    {"Authorized Vendor"}
+                </div>
+            )
+            : (flag === 0) ?
+                (
+                    <div>
+                        <Cancel style={{ color: "red" }} />
+                        {"Un Approved Vendor"}
+                    </div>
+                ) :
+                (
+                    <div>
+                        <Pending style={{ color: "teal" }} />
+                        {"Pending Vendor"}
+                    </div>
+                );
+        return status;
+
+    }
+
+    const toIndianCurrency = (num) => {
+        const curr = num.toLocaleString('en-IN', {
+            style: 'currency',
+            currency: 'INR'
+        });
+        return curr;
+    };
+
+    const statusHandler=(serviceId,statusflag)=>{
+
+        const url = `http://localhost:8080/admin/vendor/${serviceId}?status=${statusflag}`
+        axios.patch(url).then((response) => {
+            let result = response.data
+            setFlag(statusflag)
+            
+        })
+    }
 
 
     return (
@@ -17,8 +70,12 @@ const Product = () => {
                 <Sidebar />
                 <div className='product' >
                     <div className="product-title-container">
-                        <h1 className="product-title">Product</h1>
-
+                        <div>
+                            <h1 className="product-title">{service.brandName}</h1>
+                            <span className='fw-light'>
+                                <Approved />
+                            </span>
+                        </div>
                         <Link to="/newProduct">
                             <button className="product-add-btn">
                                 Create
@@ -27,77 +84,101 @@ const Product = () => {
                     </div>
                     <div className="product-top">
                         <div className="product-top-left">
-                            <Chart data={productData} dataKey="Sales" title="Sales Performance" ></Chart>
+                            <Imageslider images={service.imgList} size="300px" />
+
+                            {/* <Chart data={productData} dataKey="Sales" title="Sales Performance" ></Chart> */}
                         </div>
                         <div className="product-top-rigth">
-                            <div className="product-info-top">
-                                <img src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" className="product-info-img" />
-                                Apple Airpod
-                                <span className="product-name">
-                                </span>
-                            </div>
                             <div className="product-info-bottom">
                                 <div className="product-info-item">
                                     <span className="product-info-key">
-                                        id:
+                                        Email:
                                     </span>
                                     <span className="product-info-value">
-                                        1234
+                                        {service.email}
                                     </span>
                                 </div>
                                 <div className="product-info-item">
                                     <span className="product-info-key">
-                                        Sales:
+                                        Category:
                                     </span>
                                     <span className="product-info-value">
-                                        5234
+                                        {service.masterServiceName}
                                     </span>
                                 </div>
                                 <div className="product-info-item">
                                     <span className="product-info-key">
-                                        Active:
+                                        Vendor name:
                                     </span>
                                     <span className="product-info-value">
-                                        yes
+                                        {service.firstName} {service.lastName}
                                     </span>
                                 </div>
                                 <div className="product-info-item">
                                     <span className="product-info-key">
-                                        In Stock:
+                                        Price:
                                     </span>
                                     <span className="product-info-value">
-                                        no
+                                        {toIndianCurrency(service.servicePrice)}
                                     </span>
                                 </div>
+                                <div className="product-info-item">
+                                    <span className="product-info-key">
+                                        City:
+                                    </span>
+                                    <span className="product-info-value">
+                                        {service.vendorCity}
+                                    </span>
+                                </div>
+                                <div className="product-info-item">
+                                    <span className="product-info-key">
+                                        Mobile:
+                                    </span>
+                                    <span className="product-info-value">
+                                        {service.mobile}
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                {
+                                    flag !== 1 &&
+                                    <button
+                                        style={{ marginRight: "10px", borderRadius: "22px" }}
+                                        type="button"
+                                        class="btn btn-outline-success"
+                                        onClick={()=>statusHandler(service.serviceId,1)}
+                                    >
+                                        Approve
+                                    </button>
+                                }
+                                {
+                                    flag !== 0 &&
+                                    <button
+                                        style={{ marginRight: "10px", borderRadius: "22px" }}
+                                        type="button"
+                                        class="btn btn-outline-danger"
+                                        onClick={()=>statusHandler(service.serviceId,0)}
+                                    >
+                                        Reject
+                                    </button>
+                                }
                             </div>
                         </div>
+
                     </div>
                     <div className="product-bottom">
                         <form className="product-form">
                             <div className="product-form-left">
-                                <label>Product Name</label>
-                                <input type="text" placeholder="Apple Airpod" />
-                                <label>In Stock</label>
-                                <select name="inStock" id="inStock">
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
-                                <label>Active</label>
-                                <select name="active" id="active">
-                                    <option value="yes">Yes</option>
-                                    <option value="no">No</option>
-                                </select>
+                                <label>Service Specification</label>
+                                <p>{service.specification}</p>
+                                <label>Service Details</label>
+                                <p>
+                                    {service.description}
+                                </p>
+
                             </div>
-                            <div className="product-form-rigth">
-                                <div className="product-upload">
-                                    <img className="product-upload-img" src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-                                    <label for="file">
-                                        <Publish></Publish>
-                                    </label>
-                                    <input type="file" id="file" style={{ display: "none" }} />
-                                </div>
-                                <button className="product-btn">Update</button>
-                            </div>
+
                         </form>
                     </div>
                 </div>
