@@ -35,6 +35,12 @@ public class MasterServiceController {
         return Response.success(service);
     }
 	
+	@GetMapping("/masterService/delete/{id}")
+	public ResponseEntity<?> deleteMasterService(@PathVariable("id") int id){
+		masterService.deleteMasterService(id);
+		return Response.success("Deleted Successfully");
+	}
+	
 //	Get All Master Services
 	@GetMapping("/masterServices")
 	public ResponseEntity<?> getAllMasterServices(){
@@ -44,11 +50,13 @@ public class MasterServiceController {
 	
 //	Add New Master Services
 
-	@PostMapping(value = "/masterservice/add/",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	@PostMapping(value = "/masterservice/add",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<?> addNewServiceWithPhoto(@RequestPart("serviceImg") MultipartFile serviceImg,@RequestPart("jsonBodyData") MasterServicePhotoDto dto)
 	{
 		dto.setmServicePhoto(serviceImg);
 		String addedOrdersMsg=masterService.addNewServicePhoto(dto);
+		if(addedOrdersMsg==null)
+			return Response.error("Service Already Exists");
 		return Response.success(addedOrdersMsg);
 	}
 	

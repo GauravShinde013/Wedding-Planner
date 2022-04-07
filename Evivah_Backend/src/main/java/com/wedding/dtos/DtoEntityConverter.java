@@ -154,11 +154,7 @@ public class DtoEntityConverter {
 		for (Photos p : photosList) {
 			service.addPhotos(p);
 		}
-//		List<Photos> photosList=dto.getSaveImgList().stream().map((photoDto)->toPhotosEntity(photoDto)).collect(Collectors.toList());
-//		
-//		for (Photos p : photosList) {
-//			service.addPhotos(p);
-//		}
+
 
 		return service;
 	}
@@ -185,6 +181,8 @@ public class DtoEntityConverter {
 		dto.setCreatedTimestamp(service.getCreatedTimestamp());
 		dto.setFirstName(service.getUser().getFirstName());
 		dto.setLastName(service.getUser().getLastName());
+		dto.setEmail(service.getUser().getEmail());
+		dto.setMobile(service.getUser().getMobile());
 		dto.setProfilePicLink(service.getUser().getProfileImage());
 		dto.setVendorCity(service.getUser().getCity());
 		dto.setImgList(service.getImgList().stream().map((img) -> img.getImageLink()).collect(Collectors.toList()));

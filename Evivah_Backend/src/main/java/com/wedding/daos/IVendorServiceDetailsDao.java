@@ -17,5 +17,7 @@ public interface IVendorServiceDetailsDao extends JpaRepository<VendorServiceDet
 	List<VendorServiceDetails> findTop5ByOrderByCreatedTimestampDesc();
 	
 	List<VendorServiceDetails> findByUserRole(String role);
+	@Query(value="select v.* from vendor_service_details v order by (select avg(r_rating) as avg_rating from rating_reviews where vs_id=v.vs_id) desc limit 5", nativeQuery=true)
+    List<VendorServiceDetails> featuredvendors();
 //	List<VendorServiceDetails> findByBookingVendorServiceVendorServiceDetailsId();
 }

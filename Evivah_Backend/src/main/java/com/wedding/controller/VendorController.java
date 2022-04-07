@@ -56,8 +56,9 @@ public class VendorController {
 
 	@PostMapping(value = "/servicedetail/add/", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> addNewServiceWithPhoto(@RequestPart("serviceImg") MultipartFile[] serviceImgs,
+	public ResponseEntity<?> addNewServiceWithPhoto(@RequestPart("serviceImages") MultipartFile[] serviceImgs,
 			@RequestPart("jsonBodyData") VendorServiceDetailsDto vsDetails) {
+		System.out.println(serviceImgs);
 		List<String> urlList = Arrays.asList(serviceImgs).stream().map((file) -> photoservice.upload(file))
 				.collect(Collectors.toList());
 
@@ -122,7 +123,7 @@ public class VendorController {
 //	find Specific Service Reviews by Service Detail Id(vs_id)
 	@GetMapping("/feedback/service/{id}")
 	public ResponseEntity<?> findSpecificServiceReviews(@PathVariable("id") int id) {
-		
+
 		List<ServiceFeedbackDto> addedFeedback = ratingService.findFeedbackByServiceId(id);
 		return Response.success(addedFeedback);
 	}
@@ -134,6 +135,13 @@ public class VendorController {
 		Map<String, Object> avgRating = ratingService.getAvgRating(id);
 		return Response.success(avgRating);
 	}
+	
+	   @GetMapping("/vendor/featured")
+	    public ResponseEntity<?> getFeaturedVendors(){
+	        List<VendorServiceDetailsDto> dto =serviceDetails.featuredvendors();
+	        return Response.success(dto);
+
+	    }
 
 //	TODO: Blog all api,Master Service ,Admin
 

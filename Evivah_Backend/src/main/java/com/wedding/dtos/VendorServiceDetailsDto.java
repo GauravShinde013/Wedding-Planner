@@ -18,6 +18,8 @@ public class VendorServiceDetailsDto {
 	private String lastName;
 	private String profilePicLink;
 	private String vendorCity;
+	private String email;
+	private String mobile;
 	
 	private List<String> imgList;
 	
@@ -65,6 +67,26 @@ public class VendorServiceDetailsDto {
 	}
 
 	
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getMobile() {
+		return mobile;
+	}
+
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 
 	public String getVendorCity() {
 		return vendorCity;

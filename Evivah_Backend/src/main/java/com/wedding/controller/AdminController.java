@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class AdminController {
 	private BookingServiceImpl bookingService;
 	
 //	Approval Of vendor Service
-	@PutMapping("/admin/vendor/{id}")
+	@PatchMapping("/admin/vendor/{id}")
 	public ResponseEntity<?> approveVendor(@PathVariable("id") int serviceId,  @RequestParam("status") int flag){
 		String  isApprovedMsg=vendorService.vendorServiceApproval(serviceId,flag);
 		return Response.success(isApprovedMsg);
@@ -58,8 +59,8 @@ public class AdminController {
 	}
 	@GetMapping("/admin/allVendors")
 	public ResponseEntity<?> getAllVendors(){
-		List<VendorServiceDetailsDto> allPlanners =vendorService.getAllVendors();
-		return Response.success(allPlanners);
+		List<VendorServiceDetailsDto> allVendors =vendorService.getAllVendors();
+		return Response.success(allVendors);
 		
 	}
 	

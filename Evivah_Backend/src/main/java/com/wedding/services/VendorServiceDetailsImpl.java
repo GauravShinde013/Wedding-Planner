@@ -134,6 +134,12 @@ public class VendorServiceDetailsImpl {
 		return dto;
 	}
 	
+	  public List<VendorServiceDetailsDto> featuredvendors() {
+          List<VendorServiceDetails> vendors = serviceDetailsDao.featuredvendors();
+          List<VendorServiceDetailsDto> dto =vendors.stream().map(service->converter.toVendorServiceDetailsDto(service)).collect(Collectors.toList());
+
+          return dto;
+      }
 
 }
 

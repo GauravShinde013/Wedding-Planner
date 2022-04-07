@@ -54,13 +54,19 @@ public class MasterServiceImpl {
 	}
 
 	public String addNewServicePhoto(MasterServicePhotoDto dto) {
-		String url=photoService.upload(dto.getmServicePhoto());
-		dto.setmServiceLink(url);
-		
-		MasterServices service = converter.toMasterServicePhotosEntity(dto);
-		dao.save(service);
-
-		return "Saved successfully";
+		if (!(dao.existsByServiceName(dto.getName()))) {
+			String url=photoService.upload(dto.getmServicePhoto());
+			dto.setmServiceLink(url);
+			
+			MasterServices service = converter.toMasterServicePhotosEntity(dto);
+			dao.save(service);
+			return "New Service added Successfully";
+		}
+		return null;
+	}
+	
+	public void deleteMasterService(int id) {
+		dao.deleteById(id);
 	}
 
 }
