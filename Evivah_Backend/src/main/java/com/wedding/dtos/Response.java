@@ -25,9 +25,17 @@ public class Response {
 		}
 		return ResponseEntity.ok(map);
 	}
+	public static ResponseEntity<?> success(String jwt, Object data) {
+        Map<Object, Object> map = new HashMap<>();
+        map.put("status", "success");
+        if (data != null && jwt != null) {
+            map.put("data", data);
+            map.put("token", jwt);
+        }
+        return ResponseEntity.ok(map);
+    }
 
 	public static ResponseEntity<?> status(HttpStatus status) {
-
 		return ResponseEntity.status(status).build();
 	}
 }

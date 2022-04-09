@@ -302,7 +302,7 @@ public class DtoEntityConverter {
 
 	}
 	
-	public VendorOrdersDto toVendorOrderDto(Orders order) {
+	public VendorOrdersDto toVendorUsersOrderDto(Orders order) {
 		VendorOrdersDto dto=new VendorOrdersDto();
 		
 		dto.setOrderId(order.getOrderId());
