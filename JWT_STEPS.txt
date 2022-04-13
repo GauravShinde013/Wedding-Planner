@@ -1,0 +1,26 @@
+
+
+FLOW 
+===========================================
+
+a) Client send a login request with username and password to server.
+b) Server receive the username and password, authenticate the user
+c) If authentication is successful, then the server creates a JWT token called accessToken that stores user public info and sends it back to the client.
+d) Client receives the accessToken, from now on, client sends any request to server, client just attach the accessToken with request in the header as `Authorization : Bearer ${token}`
+e) Server receives a request, authenticates the JWT token, and continues processing the request, and then returns the result to the client.
+
+
+JWT CODING STEPS:
+===========================================
+
+1. MyUserDetailsService class to get Spring Sequrity User.
+	- Override method loadUserByUsername(String Username).
+2. JWTUtility class to create token and validate token 
+	- create token takes User as argument and creates jwt token using HS256 alorithm. We also provide expiration time for the token.
+	- validate token checks whether token belongs to valid user and whether it is yet to expire.
+3. JWTFilter class to Authorize requests using JWT token. 
+	- extracts token details from String and gets UsernamePasswordAuthenticationToken
+4. WebSecurityConfig class to configure the http requests from client side. 
+     i.e Which urls are to be skipped from jwt authorization. e.g Initially during signup, new User will not have any jwt token, so that request qualifies for authentication instead of 
+     authorization
+5. Inside controller class Autowire JWTUtility class, MyUserDetailsService class and AuthenticationManager class and call method to generate token. This token is then sent to server.
